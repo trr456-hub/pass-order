@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./Login/Login";
+import LoginContainer from "./Login/LoginContainer";
 import Home from "./Home/Home";
 
 const AppRouter = ({ isLoginState, userObj }) => {
@@ -9,7 +9,7 @@ const AppRouter = ({ isLoginState, userObj }) => {
         {isLoginState ? (
           <Route path="/" element={<Home />} />
         ) : (
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<LoginContainer />} />
         )}
       </Routes>
     </Router>
