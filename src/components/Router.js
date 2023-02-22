@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginContainer from "./Login/LoginContainer";
 import Home from "./Home/Home";
+import SignUp from "./Login/SignUp";
 
 const AppRouter = ({ isLoginState, userObj }) => {
   return (
@@ -9,7 +10,10 @@ const AppRouter = ({ isLoginState, userObj }) => {
         {isLoginState ? (
           <Route path="/" element={<Home />} />
         ) : (
-          <Route path="/" element={<LoginContainer />} />
+          <>
+            <Route path="/" element={<LoginContainer />} />
+            <Route path="/signup" element={<SignUp />} />
+          </>
         )}
       </Routes>
     </Router>

@@ -6,9 +6,12 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import logo from "assets/blackLogo.png";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const auth = getAuth();
+  const navigate = useNavigate();
+
   const socialLogin = async (e) => {
     const {
       target: { name },
@@ -35,7 +38,13 @@ const Login = () => {
         <div className="userSearch">
           <button className="search">아이디찾기</button>
           <button className="search">비밀번호찾기</button>
-          <button className="search" style={{ borderStyle: "none" }}>
+          <button
+            className="search"
+            onClick={() => {
+              navigate("/signup");
+            }}
+            style={{ borderStyle: "none" }}
+          >
             회원가입
           </button>
         </div>
