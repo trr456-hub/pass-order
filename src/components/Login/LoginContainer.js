@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import logo from "assets/blackLogo.png";
 
 const Login = () => {
   const auth = getAuth();
@@ -24,19 +25,37 @@ const Login = () => {
 
   return (
     <div className="loginContainer">
-      <img alt="logo" src="src/assets/coffeeLogo.png" />
-      <h3>저렴다방에</h3>
-      <h3>오신 것을 환영합니다</h3>
-      <button>저렴다방 아이디 로그인</button>
-      <button>아이디찾기</button>
-      <button>비밀번호찾기</button>
-      <button>회원가입</button>
-      <button name="google" onClick={socialLogin}>
-        Google 로그인
-      </button>
-      <button name="facebook" onClick={socialLogin}>
-        FaceBook 로그인
-      </button>
+      <div className="logoImg">
+        <img src={logo} alt="logo" />
+      </div>
+      <h3 className="mainText">저렴다방에</h3>
+      <h3 className="serveText">오신 것을 환영합니다</h3>
+      <div className="BtnContainer">
+        <button className="loginBtn login">저렴다방 아이디 로그인</button>
+        <div className="userSearch">
+          <button className="search">아이디찾기</button>
+          <button className="search">비밀번호찾기</button>
+          <button className="search" style={{ borderStyle: "none" }}>
+            회원가입
+          </button>
+        </div>
+        <div className="socialBtns">
+          <button
+            className="loginBtn google"
+            name="google"
+            onClick={socialLogin}
+          >
+            <span>Google</span> 로그인
+          </button>
+          <button
+            className="loginBtn facebook"
+            name="facebook"
+            onClick={socialLogin}
+          >
+            <span>facebook</span> 로그인
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
+
+$logoColor: #582f1e;
+$facebook: #2374e1;
+$google: #5f6368;
+
+// loginContainer
+
+//logo
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.logoImg {
+  margin-bottom: 50px;
+}
+
+// text
+.mainText {
+  font-size: 35px;
+  font-weight: bold;
+  color: $logoColor;
+  margin: 5px;
+}
+.serveText {
+  font-size: 35px;
+  font-weight: 500;
+  color: $logoColor;
+  margin: 5px;
+}
+
+// 로그인 회원가입 버튼
+.BtnContainer {
+  width: 100%;
+  max-width: 400px;
+  margin: 0px auto;
+  padding-top: 40px;
+}
+
+//로그인 버튼
+.loginBtn {
+  border: 1px solid $logoColor;
+  width: 100%;
+  border-radius: 44px;
+  padding: 13px 0px;
+  margin: 10px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
+}
+.login {
+  color: white;
+  background: $logoColor;
+}
+
+//user정보찾기
+.userSearch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.search {
+  color: gray;
+  border-right: 1px solid gray;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+// 소셜로그인 버튼
+.socialBtns {
+  margin-top: 80px;
+}
+.google {
+  border: 1px solid $google;
+  color: $google;
+}
+.google > span {
+  font-size: 20px;
+}
+.facebook {
+  border: 1px solid $facebook;
+  color: $facebook;
+}
+.facebook > span {
+  font-size: 20px;
+  font-family: "Tilt Warp", cursive;
+}
