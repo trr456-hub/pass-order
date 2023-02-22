@@ -1,37 +1,48 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const [name, setName] = useState("");
-  const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
+  const [pwd2, setPwd2] = useState("");
   const [email, setEmail] = useState("");
-  const [nicname, setNicName] = useState("");
+  const [nickname, setNickName] = useState("");
   const [error, setError] = useState("");
   const onChange = (e) => {
     const {
       target: { value, name },
     } = e;
-    if (name === "name") {
-      setName(value);
-    } else if (name === "id") {
-      setId(value);
+    if (name === "email") {
+      setEmail(value);
     } else if (name === "pwd") {
       setPwd(value);
-    } else if (name === "email") {
-      setEmail(value);
-    } else if (name === "nicname") {
-      setNicName(value);
+    } else if (name === "pwd2") {
+      setPwd2(value);
+    } else if (name === "nickname") {
+      setNickName(value);
     }
     // console.log(value);
   };
   const auth = getAuth();
+  const navigate = useNavigate();
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      createUserWithEmailAndPassword();
-    } catch {
-      setError();
+    if (pwd === pwd2) {
+      try {
+        const { user } = await createUserWithEmailAndPassword(auth, email, pwd);
+        await updateProfile(user, {
+          displayName: nickname,
+        });
+        navigate("/");
+      } catch (error) {
+        setError(error.message);
+      }
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
     }
   };
   return (
@@ -40,17 +51,9 @@ const SignUp = () => {
       <div className="signupContainer">
         <form onSubmit={onSubmit} className="signUpForm">
           <input
-            className="inputs"
-            name="name"
+            name="email"
             type="text"
-            placeholder="이름을 입력해주세요"
-            required
-            onChange={onChange}
-          />
-          <input
-            name="id"
-            type="text"
-            placeholder="아이디(영문,숫자 조합 5~16자리)"
+            placeholder="아이디(test@addres.com 형식으로 적어주세요)"
             className="inputs"
             required
             onChange={onChange}
@@ -72,15 +75,7 @@ const SignUp = () => {
             onChange={onChange}
           />
           <input
-            name="email"
-            type="text"
-            placeholder="이메일 주소"
-            className="inputs"
-            required
-            onChange={onChange}
-          />
-          <input
-            name="nicname"
+            name="nickname"
             type="text"
             placeholder="닉네임"
             className="inputs"
@@ -100,6 +95,7 @@ const SignUp = () => {
           </div>
           <input type="submit" value="가입" className="submitBtn" />
         </form>
+        <div className="errMsg">{error}</div>
       </div>
     </div>
   );

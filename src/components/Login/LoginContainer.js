@@ -34,10 +34,23 @@ const Login = () => {
       <h3 className="mainText">저렴다방에</h3>
       <h3 className="serveText">오신 것을 환영합니다</h3>
       <div className="BtnContainer">
-        <button className="loginBtn login">저렴다방 아이디 로그인</button>
+        <button
+          onClick={() => {
+            navigate("/signin");
+          }}
+          className="loginBtn login"
+        >
+          저렴다방 아이디 로그인
+        </button>
         <div className="userSearch">
-          <button className="search">아이디찾기</button>
-          <button className="search">비밀번호찾기</button>
+          <button
+            className="search"
+            onClick={() => {
+              navigate("/pwdserch");
+            }}
+          >
+            비밀번호찾기
+          </button>
           <button
             className="search"
             onClick={() => {

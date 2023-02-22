@@ -2,8 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginContainer from "./Login/LoginContainer";
 import Home from "./Home/Home";
 import SignUp from "./Login/SignUp";
+import SignIn from "./Login/SignIn";
+import PwdSerch from "./Login/PwdSerch";
 
 const AppRouter = ({ isLoginState, userObj }) => {
+  console.log(userObj);
   return (
     <Router>
       <Routes>
@@ -13,6 +16,8 @@ const AppRouter = ({ isLoginState, userObj }) => {
           <>
             <Route path="/" element={<LoginContainer />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/pwdserch" element={<PwdSerch />} />
           </>
         )}
       </Routes>
