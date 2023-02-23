@@ -2,15 +2,20 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const Sidebar = ({ setSidebar }) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const handleClose = () => {
-    setSidebar(false);
+    setSidebarOpen(false);
   };
   return (
-    <div className="sidebar">
-      <button>
+    <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+      <button className="closeBtn">
         <FontAwesomeIcon icon={faXmark} onClick={handleClose} />
       </button>
+      <ul>
+        <li>menu item1</li>
+        <li>menu item2</li>
+        <li>menu item3</li>
+      </ul>
     </div>
   );
 };

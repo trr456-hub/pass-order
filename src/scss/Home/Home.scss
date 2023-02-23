@@ -1,3 +1,5 @@
+$logoColor: #582f1e;
+
 // HOME
 
 //header
@@ -23,21 +25,33 @@
   width: 30px;
   height: 30px;
   cursor: pointer;
+  position: relative;
+  left: 20px;
+  color: $logoColor;
 }
 .headerLogo {
   width: 180px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 //sidebar
 .sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
-  bottom: 0;
-  width: 300px;
+  left: -250px;
+  height: 100%;
+  width: 250px;
   background-color: white;
   box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.3);
-  z-index: 1;
-  transition: 0.5s ease;
+  z-index: 1000;
+  transition: left 0.5s ease-out;
+
+  &.open {
+    left: 0;
+  }
+}
+.closeBtn {
+  display: flex;
+  margin: 0 auto;
 }

@@ -53,7 +53,7 @@ const SignUp = () => {
           <input
             name="email"
             type="text"
-            placeholder="아이디(test@addres.com 형식으로 적어주세요)"
+            placeholder="아이디(이메일 형식으로 적어주세요)"
             className="inputs"
             required
             onChange={onChange}
@@ -61,7 +61,7 @@ const SignUp = () => {
           <input
             name="pwd"
             type="password"
-            placeholder="비밀번호(영문,숫자,특수문자 조합 8~20자리)"
+            placeholder="비밀번호(영문,숫자 조합 8~20자리)"
             className="inputs"
             required
             onChange={onChange}

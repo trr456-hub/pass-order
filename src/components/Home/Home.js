@@ -5,10 +5,12 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./Sidebar";
 
 const Home = () => {
-  const [sidebar, setSidebar] = useState(false);
-  const handleSidebar = () => {
-    setSidebar(!sidebar);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!sidebarOpen);
   };
+  console.log("setSidebarOpen", setSidebarOpen);
+  console.log("sidebarOpen", sidebarOpen);
   return (
     <div>
       <header className="homeHeader">
@@ -16,12 +18,12 @@ const Home = () => {
           <FontAwesomeIcon
             icon={faBars}
             className="headerBars"
-            onClick={handleSidebar}
+            onClick={handleSidebarToggle}
           />
           <div className="logoDiv">
             <img src={homeLogo} alt="홈로고" className="headerLogo" />
           </div>
-          {sidebar && <Sidebar setSidebar={setSidebar} />}
+          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         </div>
       </header>
     </div>
