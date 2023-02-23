@@ -5,6 +5,7 @@ import "./scss/normalize.scss";
 import "./scss/reset.scss";
 import "./scss/Login/LoginContainer.scss";
 import "./scss/Login/SignUp.scss";
+import "./scss/Home/Home.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);

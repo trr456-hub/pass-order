@@ -26,7 +26,7 @@ const PwdSerch = () => {
 
   return (
     <div>
-      <header>비밀번호찾기</header>
+      <header className="loginHeader">비밀번호찾기</header>
       <div className="signupContainer">
         <form onSubmit={onSubmit} className="signUpForm">
           <input

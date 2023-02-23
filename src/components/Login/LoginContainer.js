@@ -5,7 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import logo from "assets/blackLogo.png";
+import logo from "assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

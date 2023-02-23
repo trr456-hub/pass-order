@@ -47,7 +47,7 @@ const SignUp = () => {
   };
   return (
     <div>
-      <header>회원가입</header>
+      <header className="loginHeader">회원가입</header>
       <div className="signupContainer">
         <form onSubmit={onSubmit} className="signUpForm">
           <input
