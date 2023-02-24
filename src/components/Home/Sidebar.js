@@ -6,15 +6,25 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const handleClose = () => {
     setSidebarOpen(false);
   };
+  const menuItems = [
+    "메뉴소개",
+    "적립",
+    "주문",
+    "주문내역",
+    "MY메뉴",
+    "매장찾기",
+  ];
   return (
     <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-      <button className="closeBtn">
-        <FontAwesomeIcon icon={faXmark} onClick={handleClose} />
-      </button>
-      <ul>
-        <li>menu item1</li>
-        <li>menu item2</li>
-        <li>menu item3</li>
+      <div className="closeBtn">
+        <button>
+          <FontAwesomeIcon icon={faXmark} onClick={handleClose} />
+        </button>
+      </div>
+      <ul className="menuItem">
+        {menuItems.map((menuItem) => (
+          <li key={menuItem}>{menuItem}</li>
+        ))}
       </ul>
     </div>
   );

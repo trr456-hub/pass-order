@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
+
 $logoColor: #582f1e;
 
 // HOME
@@ -8,6 +10,7 @@ $logoColor: #582f1e;
   justify-content: center;
   align-items: center;
   width: 100%;
+  font-family: "Noto Sans KR", sans-serif;
 }
 .homeHeader > div {
   width: 100%;
@@ -37,6 +40,7 @@ $logoColor: #582f1e;
 
 //sidebar
 .sidebar {
+  font-family: "Noto Sans KR", sans-serif;
   position: fixed;
   top: 0;
   left: -250px;
@@ -53,5 +57,47 @@ $logoColor: #582f1e;
 }
 .closeBtn {
   display: flex;
+  flex-direction: row-reverse;
+  padding: 10px;
+}
+.closeBtn > button {
+  font-size: 30px;
+}
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.menuItem > li {
+  font-size: 20px;
+  margin: 10px 0;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 15px;
+  width: 80%;
+}
+
+//homeContainer
+.homeContainer {
+  width: 100%;
+  max-width: 450px;
+  display: flex;
   margin: 0 auto;
+}
+.imgContainer {
+  width: 100%;
+  height: 300px;
+  //   overflow: hidden;
+  position: relative;
+}
+.slider {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 1s ease-in-out;
+}
+.slider > img {
+  width: 100%;
+  height: 300px;
 }
