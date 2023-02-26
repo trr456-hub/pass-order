@@ -6,12 +6,12 @@ import SignIn from "./Login/SignIn";
 import PwdSerch from "./Login/PwdSerch";
 
 const AppRouter = ({ isLoginState, userObj }) => {
-  console.log(userObj);
+  // console.log(userObj);
   return (
     <Router>
       <Routes>
         {isLoginState ? (
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home userObj={userObj} />} />
         ) : (
           <>
             <Route path="/" element={<LoginContainer />} />

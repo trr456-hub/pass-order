@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import homeLogo from "assets/homeLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -7,25 +7,27 @@ import mainImg1 from "assets/main/mainImg1.jpg";
 import mainImg2 from "assets/main/mainImg2.jpg";
 import mainImg3 from "assets/main/mainImg3.jpg";
 import mainImg4 from "assets/main/mainImg4.jpg";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const images = [mainImg1, mainImg2, mainImg3, mainImg4];
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
   };
-  useEffect(() => {
-    // 슬라이더 이동을 위한 타이머 설정
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 2000);
-
-    // 타이머 정리
-    return () => clearInterval(timer);
-  }, []);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+  };
   return (
     <div>
       <header className="homeHeader">
@@ -43,14 +45,21 @@ const Home = () => {
       </header>
       <div className="homeContainer">
         <div className="imgContainer">
-          <div
-            className="slider"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
+          <Slider {...settings}>
             {images.map((img, i) => (
-              <img key={i} src={img} alt="images" />
+              <div className="slider" key={i}>
+                <img src={img} alt="images" />
+              </div>
             ))}
-          </div>
+          </Slider>
+        </div>
+        <div className="mainName">
+          <span>{userObj.displayName} 님</span>
+          <span>환영합니다.</span>
+        </div>
+        <div className="informContainer">
+          <div className="stamp">내 스탬프</div>
+          <div className="information">모아보기</div>
         </div>
       </div>
     </div>

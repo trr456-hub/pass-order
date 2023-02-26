@@ -79,25 +79,69 @@ $logoColor: #582f1e;
 
 //homeContainer
 .homeContainer {
+  font-family: "Noto Sans KR", sans-serif;
   width: 100%;
   max-width: 450px;
   display: flex;
   margin: 0 auto;
+  flex-direction: column;
 }
 .imgContainer {
   width: 100%;
-  height: 300px;
+  height: 250px;
   //   overflow: hidden;
   position: relative;
 }
 .slider {
-  display: flex;
-  position: absolute;
-  left: 0;
+  width: 100%;
+  height: 250px;
   top: 0;
-  transition: transform 1s ease-in-out;
+  left: 0;
 }
 .slider > img {
   width: 100%;
-  height: 300px;
+  height: 250px;
+  top: 0;
+  left: 0;
+}
+.slick-dots {
+  position: absolute;
+  bottom: 0px;
+  list-style: none;
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+// mainName
+.mainName {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+  padding: 0 10px;
+}
+.mainName > span {
+  font-size: 20px;
+}
+// informContainer
+.informContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
+.stamp {
+  border: 1px solid black;
+  border-radius: 20px;
+  height: 220px;
+  position: relative;
+}
+.information {
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 410px;
+  height: 150px;
+  position: absolute;
+  bottom: 121px;
 }
