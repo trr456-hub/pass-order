@@ -4,6 +4,8 @@ import Home from "./Home/Home";
 import SignUp from "./Login/SignUp";
 import SignIn from "./Login/SignIn";
 import PwdSerch from "./Login/PwdSerch";
+import Order from "./Order/Order";
+import Location from "./Location/Location";
 
 const AppRouter = ({ isLoginState, userObj }) => {
   // console.log(userObj);
@@ -11,7 +13,11 @@ const AppRouter = ({ isLoginState, userObj }) => {
     <Router>
       <Routes>
         {isLoginState ? (
-          <Route path="/" element={<Home userObj={userObj} />} />
+          <>
+            <Route path="/" element={<Home userObj={userObj} />} />
+            <Route path="/order" element={<Order userObj={userObj} />} />
+            <Route path="/location" element={<Location userObj={userObj} />} />
+          </>
         ) : (
           <>
             <Route path="/" element={<LoginContainer />} />

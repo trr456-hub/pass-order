@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import homeLogo from "assets/homeLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faMugSaucer,
+  faStamp,
+  faUser,
+  faMapLocation,
+} from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "./Sidebar";
 import mainImg1 from "assets/main/mainImg1.jpg";
 import mainImg2 from "assets/main/mainImg2.jpg";
@@ -12,6 +19,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const images = [mainImg1, mainImg2, mainImg3, mainImg4];
+const menu = [
+  { name: "주문", icon: faMugSaucer, url: "/order" },
+  { name: "적립내역", icon: faStamp, url: "/history" },
+  { name: "MY메뉴", icon: faUser, url: "/menu" },
+  { name: "매장찾기", icon: faMapLocation, url: "/location" },
+];
 
 const Home = ({ userObj }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -59,7 +72,17 @@ const Home = ({ userObj }) => {
         </div>
         <div className="informContainer">
           <div className="stamp">
-            <div className="information"></div>
+            <span>내 스탬프 0개</span>
+            <div className="information">
+              {menu.map((item, i) => (
+                <Link to={item.url} key={i} className="menuElement">
+                  <div className="menuBox">
+                    <FontAwesomeIcon icon={item.icon} />
+                  </div>
+                  <span>{item.name}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

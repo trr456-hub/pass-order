@@ -125,11 +125,12 @@ $backColor: #f8f8f8;
 .mainName {
   display: flex;
   flex-direction: column;
-  margin: 30px 0;
+  margin: 27px 0;
   padding: 0 10px;
 }
 .mainName > span {
   font-size: 20px;
+  margin: 3px 0;
 }
 // informContainer
 .informContainer {
@@ -144,6 +145,11 @@ $backColor: #f8f8f8;
   height: 220px;
   position: relative;
 }
+.stamp > span {
+  position: absolute;
+  margin: 25px;
+  font-size: 20px;
+}
 .information {
   background-color: white;
   color: black;
@@ -153,4 +159,31 @@ $backColor: #f8f8f8;
   height: 70%;
   left: 0;
   bottom: -1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.menuElement {
+  margin: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.menuBox {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 45px;
+  height: 45px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  background-color: $logoColor;
+  color: white;
+}
+.menuElement > span {
+  font-size: 12px;
 }
