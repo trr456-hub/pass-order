@@ -16,12 +16,16 @@ const Location = () => {
   }, []);
 
   return (
-    <div>
-      {stores.map((store) => (
-        <div key={store.number}>
-          <h2>{store.name}</h2>
-        </div>
-      ))}
+    <div className="locationContainer">
+      <header className="locationHeader">매장정보</header>
+      <div className="location">
+        {stores.map((store) => (
+          <div key={store.number}>
+            <h2>{store.name}</h2>
+            <h3>{store.address}</h3>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

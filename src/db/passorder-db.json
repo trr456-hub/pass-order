@@ -1,0 +1,120 @@
+{
+  "passOrder": {
+    "products": {
+      "product1": {
+        "description": "본연의 원두의 맛",
+        "name": "에스프레소",
+        "price": 1300,
+        "itemcode": 2001
+      },
+      "product2": {
+        "description": "부드러운 향과 깊은 맛의 아메리카노",
+        "name": "아메리카노",
+        "price": 1500,
+        "itemcode": 2002
+      },
+      "product3": {
+        "description": "부드러운 우유와 원두의 카페라떼",
+        "name": "카페라떼",
+        "price": 2000,
+        "itemcode": 2003
+      },
+      "product4": {
+        "description": "원두와 바닐라의 만남",
+        "name": "바닐라라떼",
+        "price": 2300,
+        "itemcode": 2004
+      },
+      "product5": {
+        "description": "초코와 원두의 만남",
+        "name": "카페모카",
+        "price": 2500,
+        "itemcode": 2005
+      },
+      "product6": {
+        "description": "헤이즐넛과 원두의 환상의 콜라보",
+        "name": "헤이즐넛",
+        "price": 2500,
+        "itemcode": 2006
+      },
+      "product7": {
+        "description": "이테리의 향이 그대로인 카푸치노",
+        "name": "카푸치노",
+        "price": 2600,
+        "itemcode": 2007
+      },
+      "product8": {
+        "description": "달달한 카라멜과 우유의 만남",
+        "name": "카라멜 마끼아또",
+        "price": 2700,
+        "itemcode": 2008
+      }
+    },
+    "stores": {
+      "store1": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 백석점",
+        "number": 1001,
+        "address": "경기도 고양시 일산동구 백석동 1308"
+      },
+      "store2": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 풍동점",
+        "number": 1002,
+        "address": "경기도 고양시 일산동구 풍동 1273-2"
+      },
+      "store3": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 은평점",
+        "number": 1003,
+        "address": "서울특별시 은평구 구산동 1-1"
+      },
+      "store4": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 파주점",
+        "number": 1004,
+        "address": "경기도 파주시 금촌동 958-9"
+      },
+      "store5": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 강남점",
+        "number": 1005,
+        "address": "서울특별시 강남구 역삼동 825"
+      },
+      "store6": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 화정점",
+        "number": 1006,
+        "address": "경기도 고양시 덕양구 화정동 978-2"
+      },
+      "store7": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 종로점",
+        "number": 1007,
+        "address": "서울특별시 종로구 세종로 161-1"
+      },
+      "store8": {
+        "menu": {
+          "products": true
+        },
+        "name": "저렴다방 화곡점",
+        "number": 1008,
+        "address": "서울특별시 강서구 화곡동 1076-19"
+      }
+    }
+  }
+}
