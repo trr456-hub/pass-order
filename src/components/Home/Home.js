@@ -29,7 +29,7 @@ const Home = ({ userObj }) => {
     autoplay: true,
   };
   return (
-    <div>
+    <div className="home">
       <header className="homeHeader">
         <div>
           <FontAwesomeIcon
@@ -58,8 +58,9 @@ const Home = ({ userObj }) => {
           <span>환영합니다.</span>
         </div>
         <div className="informContainer">
-          <div className="stamp">내 스탬프</div>
-          <div className="information">모아보기</div>
+          <div className="stamp">
+            <div className="information"></div>
+          </div>
         </div>
       </div>
     </div>
