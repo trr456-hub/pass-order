@@ -1,53 +1,112 @@
 {
   "passOrder": {
-    "products": {
+    "iceProducts": {
+      "product1": {
+        "description": "부드러운 향과 깊은 맛의 아메리카노",
+        "name": "아메리카노",
+        "price": 1700,
+        "itemcode": 2001,
+        "img": "https://sitem.ssgcdn.com/29/96/11/item/1000329119629_i1_500.jpg"
+      },
+      "product2": {
+        "description": "부드러운 우유와 원두의 카페라떼",
+        "name": "카페라떼",
+        "price": 2200,
+        "itemcode": 2002,
+        "img": "https://image.aladin.co.kr/product/8883/76/cover500/s572635127_2.jpg"
+      },
+      "product3": {
+        "description": "원두와 바닐라의 만남",
+        "name": "바닐라라떼",
+        "price": 2500,
+        "itemcode": 2003,
+        "img": "https://sodagift.com/img/image/666256337667460.jpg"
+      },
+      "product4": {
+        "description": "초코와 원두의 만남",
+        "name": "카페모카",
+        "price": 2700,
+        "itemcode": 2004,
+        "img": "http://www.viennacoffeehouse.co.kr/data/file/m1/1795031452_UjHWcOIk_199c55f6cd7fd68202b6a9c34eed58fc43494cbc.png"
+      },
+      "product5": {
+        "description": "헤이즐넛과 원두의 환상의 콜라보",
+        "name": "헤이즐넛",
+        "price": 2700,
+        "itemcode": 2005,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGkZUBl4NuUj0B00UNT8_BtUILXbCtFZ4gpg&usqp=CAU"
+      },
+      "product6": {
+        "description": "이테리의 향이 그대로인 카푸치노",
+        "name": "카푸치노",
+        "price": 2800,
+        "itemcode": 2006,
+        "img": "https://img.danawa.com/prod_img/500000/598/746/img/9746598_1.jpg?shrink=330:330&_v=20191023173556"
+      },
+      "product7": {
+        "description": "달달한 카라멜과 우유의 만남",
+        "name": "카라멜 마끼아또",
+        "price": 2900,
+        "itemcode": 2007,
+        "img": "http://cafedroptop.com/uploadimg/0.57418100_1594678345.jpg"
+      }
+    },
+    "hotProducts": {
       "product1": {
         "description": "본연의 원두의 맛",
         "name": "에스프레소",
         "price": 1300,
-        "itemcode": 2001
+        "itemcode": 3001,
+        "img": "http://prabean1.cafe24.com/files/attach/images/201/410/588cb6335122dab769c01b5a37fd6b81.jpg"
       },
       "product2": {
         "description": "부드러운 향과 깊은 맛의 아메리카노",
         "name": "아메리카노",
         "price": 1500,
-        "itemcode": 2002
+        "itemcode": 3002,
+        "img": "https://sitem.ssgcdn.com/23/60/97/item/1000029976023_i1_1200.jpg"
       },
       "product3": {
         "description": "부드러운 우유와 원두의 카페라떼",
         "name": "카페라떼",
         "price": 2000,
-        "itemcode": 2003
+        "itemcode": 3003,
+        "img": "https://image.utoimage.com/preview/cp868101/2016/10/201610013602_500.jpg"
       },
       "product4": {
         "description": "원두와 바닐라의 만남",
         "name": "바닐라라떼",
         "price": 2300,
-        "itemcode": 2004
+        "itemcode": 3004,
+        "img": "http://www.kaphar.co.kr/files/attach/images/178/430/e95f570d319897634e72be71a3afaea0.jpg"
       },
       "product5": {
         "description": "초코와 원두의 만남",
         "name": "카페모카",
         "price": 2500,
-        "itemcode": 2005
+        "itemcode": 3005,
+        "img": "https://www.starbucksathome.com/kr/sites/default/files/2021-03/Vanilla%20Latte_LongShadow_Cream_1.png"
       },
       "product6": {
         "description": "헤이즐넛과 원두의 환상의 콜라보",
         "name": "헤이즐넛",
         "price": 2500,
-        "itemcode": 2006
+        "itemcode": 3006,
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmYQr53kC03zhBrnLYVWyC9fo0q5xIkpj0vGebBwzCpPLkJcu_h_FEzWITUh-0TR5iUmA&usqp=CAU"
       },
       "product7": {
         "description": "이테리의 향이 그대로인 카푸치노",
         "name": "카푸치노",
         "price": 2600,
-        "itemcode": 2007
+        "itemcode": 3007,
+        "img": "http://www.beantobean.com/web/upload/NNEditor/20160513/ECB9B4ED91B8ECB998EB85B8.jpg"
       },
       "product8": {
         "description": "달달한 카라멜과 우유의 만남",
         "name": "카라멜 마끼아또",
         "price": 2700,
-        "itemcode": 2008
+        "itemcode": 3008,
+        "img": "https://thumb.ac-illust.com/8e/8eafdbf6cba206497fa7c6ef4bb1fef1_t.jpeg"
       }
     },
     "stores": {

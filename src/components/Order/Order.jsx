@@ -8,7 +8,7 @@ const Order = ({ userObj }) => {
   useEffect(() => {
     const db = getDatabase();
     const storesRef = ref(db, "passOrder/stores");
-    //db호출
+    //db호출 여 매장정보 프린팅
     onValue(storesRef, (snapshot) => {
       const data = snapshot.val();
       const storesList = Object.values(data);
@@ -23,9 +23,15 @@ const Order = ({ userObj }) => {
         {stores.map((store) => (
           <div key={store.number}>
             <Link
-              to={{
-                pathname: `/order/menu/${store.number}`,
-                state: { storeNumber: store.number },
+              to={`/order/menu`}
+              state={{ storeNumber: store }}
+              onClick={(e) => {
+                if (window.confirm(`${store.name} 해당 매장에서 주문합니다.`)) {
+                  return;
+                } else {
+                  e.preventDefault();
+                  return false;
+                }
               }}
             >
               <h2>{store.name}</h2>

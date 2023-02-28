@@ -3,14 +3,20 @@
 $logoColor: #582f1e;
 $backColor: #f8f8f8;
 
-// Location.js
-
-.locationContainer {
-  font-family: "Noto Sans KR", sans-serif;
+// menu tap
+.menuContainer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  //   background-color: $backColor;
 }
-.locationHeader {
+
+//menuheader
+.menuHeader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,28 +28,37 @@ $backColor: #f8f8f8;
   top: 0;
   font-size: 20px;
 }
-.location {
+
+//menu
+.menu {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 450px;
-  margin: 0 auto;
   padding-top: 7vh;
+  margin: 0 auto;
 }
-.location > div {
+
+// storeComment
+.storeComment {
   display: flex;
-  flex-direction: column;
   width: 100%;
-  padding: 12px 0;
-  border-bottom: 1px solid lightgray;
+  padding: 10px 10px;
+  align-items: baseline;
 }
-.location > div > a > h2 {
-  font-size: 20px;
-  margin: 5px 30px;
+.comment1 {
+  font-size: 18px;
+  font-weight: bold;
 }
-.location > div > a > h3 {
+.comment2 {
   font-size: 15px;
-  margin: 8px 30px;
+}
+
+// 카페 메뉴판
+.menus {
+  display: flex;
+}
+.menus > div {
 }

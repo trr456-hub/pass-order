@@ -18,7 +18,7 @@ const AppRouter = ({ isLoginState, userObj }) => {
             <Route path="/" element={<Home userObj={userObj} />} />
             <Route path="/order" element={<Order userObj={userObj} />} />
             <Route path="/location" element={<Location userObj={userObj} />} />
-            <Route path="/order/menu/:storedId" element={<Menu />} />
+            <Route path="/order/menu" element={<Menu />} />
           </>
         ) : (
           <>
