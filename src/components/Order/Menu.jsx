@@ -42,8 +42,8 @@ const Menu = () => {
               <img
                 src={menu.img}
                 alt="메뉴이미지"
-                width="150px"
-                height="150px"
+                width="140px"
+                height="140px"
               />
               <span>{menu.name}</span>
             </div>
