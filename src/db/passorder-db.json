@@ -6,21 +6,21 @@
         "name": "아메리카노",
         "price": 1700,
         "itemcode": 2001,
-        "img": "https://sitem.ssgcdn.com/29/96/11/item/1000329119629_i1_500.jpg"
+        "img": "https://image.aladin.co.kr/product/8883/82/cover/8925925036_3.jpg"
       },
       "product2": {
         "description": "부드러운 우유와 원두의 카페라떼",
         "name": "카페라떼",
         "price": 2200,
         "itemcode": 2002,
-        "img": "https://image.aladin.co.kr/product/8883/76/cover500/s572635127_2.jpg"
+        "img": "https://image.aladin.co.kr/product/8883/76/cover/s572635127_2.jpg"
       },
       "product3": {
         "description": "원두와 바닐라의 만남",
         "name": "바닐라라떼",
         "price": 2500,
         "itemcode": 2003,
-        "img": "https://sodagift.com/img/image/666256337667460.jpg"
+        "img": "https://image.aladin.co.kr/product/25302/11/cover/p572832627_2.jpg"
       },
       "product4": {
         "description": "초코와 원두의 만남",
@@ -34,7 +34,7 @@
         "name": "헤이즐넛",
         "price": 2700,
         "itemcode": 2005,
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGkZUBl4NuUj0B00UNT8_BtUILXbCtFZ4gpg&usqp=CAU"
+        "img": "http://www.viennacoffeehouse.co.kr/data/file/m1/1795031452_cVmMQvWw_92231f72d30c745bb5251c00e67932cd13f705e1.png"
       },
       "product6": {
         "description": "이테리의 향이 그대로인 카푸치노",
@@ -48,7 +48,7 @@
         "name": "카라멜 마끼아또",
         "price": 2900,
         "itemcode": 2007,
-        "img": "http://cafedroptop.com/uploadimg/0.57418100_1594678345.jpg"
+        "img": "http://www.viennacoffeehouse.co.kr/data/file/m1/1795031452_x6jb7GQN_8da9d2b91d76ed3cd940779262cf79259720b361.png"
       }
     },
     "hotProducts": {
@@ -85,7 +85,7 @@
         "name": "카페모카",
         "price": 2500,
         "itemcode": 3005,
-        "img": "https://www.starbucksathome.com/kr/sites/default/files/2021-03/Vanilla%20Latte_LongShadow_Cream_1.png"
+        "img": "http://www.viennacoffeehouse.co.kr/data/file/m1/1795031452_9VeNHchz_4f1ae49c1ca94265d7d8eacd759950fcd47e918d.png"
       },
       "product6": {
         "description": "헤이즐넛과 원두의 환상의 콜라보",

@@ -8,10 +8,11 @@ $backColor: #f8f8f8;
   display: flex;
   flex-direction: column;
   width: 100%;
+  // height: 100vh;
   justify-content: center;
   align-items: center;
   font-family: "Noto Sans KR", sans-serif;
-  //   background-color: $backColor;
+  background-color: $backColor;
 }
 
 //menuheader
@@ -55,16 +56,44 @@ $backColor: #f8f8f8;
   font-size: 15px;
 }
 
+//메뉴카테고리
+.menusCategorie {
+  display: flex;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+.menusCategorie > span {
+  font-size: 13px;
+  margin: 0 10px;
+  background-color: white;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+
+  &.selected {
+    background-color: lightgray;
+  }
+}
+
 // 카페 메뉴판
 .menus {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  background-color: white;
 }
 .menus > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+.menus > div > span {
+  padding-top: 10px;
 }

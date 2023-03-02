@@ -5,9 +5,22 @@ import { useLocation } from "react-router-dom";
 const Menu = () => {
   const [hotMenus, setHotMenus] = useState([]);
   const [iceMenus, setIceMenus] = useState([]);
+  const [viewMenu, setViewMenu] = useState(true);
+  const [selectMenu, setSelectMenu] = useState("hot");
 
   const location = useLocation();
   const storeNumber = location.state.storeNumber.name;
+
+  const view = (e) => {
+    const target = e.target.innerText;
+    if (target === "따듯한커피") {
+      setViewMenu(true);
+      setSelectMenu("hot");
+    } else {
+      setViewMenu(false);
+      setSelectMenu("ice");
+    }
+  };
 
   useEffect(() => {
     const db = getDatabase();
@@ -36,18 +49,44 @@ const Menu = () => {
           <span className="comment1">{storeNumber}</span>
           <span className="comment2">의 메뉴입니다.</span>
         </div>
+        <div className="menusCategorie">
+          <span
+            className={`ice ${selectMenu === "ice" ? "selected" : ""}`}
+            onClick={view}
+          >
+            따듯한커피
+          </span>
+          <span
+            className={`hot ${selectMenu === "hot" ? "selected" : ""}`}
+            onClick={view}
+          >
+            시원한커피
+          </span>
+        </div>
         <div className="menus">
-          {hotMenus.map((menu) => (
-            <div key={menu.itemcode}>
-              <img
-                src={menu.img}
-                alt="메뉴이미지"
-                width="140px"
-                height="140px"
-              />
-              <span>{menu.name}</span>
-            </div>
-          ))}
+          {viewMenu
+            ? hotMenus.map((menu) => (
+                <div key={menu.itemcode}>
+                  <img
+                    src={menu.img}
+                    alt="메뉴이미지"
+                    width="140px"
+                    height="140px"
+                  />
+                  <span>{menu.name}</span>
+                </div>
+              ))
+            : iceMenus.map((menu) => (
+                <div key={menu.itemcode}>
+                  <img
+                    src={menu.img}
+                    alt="메뉴이미지"
+                    width="140px"
+                    height="140px"
+                  />
+                  <span>{menu.name}</span>
+                </div>
+              ))}
         </div>
       </div>
     </div>
