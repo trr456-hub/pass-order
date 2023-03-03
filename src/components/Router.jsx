@@ -7,6 +7,7 @@ import PwdSerch from "./Login/PwdSerch";
 import Order from "./Order/Order";
 import Location from "./Location/Location";
 import Menu from "./Order/Menu";
+import MenuDetail from "./Order/MenuDetail";
 
 const AppRouter = ({ isLoginState, userObj }) => {
   // console.log(userObj);
@@ -19,6 +20,7 @@ const AppRouter = ({ isLoginState, userObj }) => {
             <Route path="/order" element={<Order userObj={userObj} />} />
             <Route path="/location" element={<Location userObj={userObj} />} />
             <Route path="/order/menu" element={<Menu />} />
+            <Route path="/order/menu/:itemCode" element={<MenuDetail />} />
           </>
         ) : (
           <>

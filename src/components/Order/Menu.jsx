@@ -1,6 +1,6 @@
 import { getDatabase, onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Menu = () => {
   const [hotMenus, setHotMenus] = useState([]);
@@ -66,7 +66,11 @@ const Menu = () => {
         <div className="menus">
           {viewMenu
             ? hotMenus.map((menu) => (
-                <div key={menu.itemcode}>
+                <Link
+                  to={`/order/menu/${menu.itemcode}`}
+                  state={{ itemcode: menu }}
+                  key={menu.itemcode}
+                >
                   <img
                     src={menu.img}
                     alt="메뉴이미지"
@@ -74,10 +78,14 @@ const Menu = () => {
                     height="140px"
                   />
                   <span>{menu.name}</span>
-                </div>
+                </Link>
               ))
             : iceMenus.map((menu) => (
-                <div key={menu.itemcode}>
+                <Link
+                  to={`/order/menu/${menu.itemcode}`}
+                  state={{ itemcode: menu }}
+                  key={menu.itemcode}
+                >
                   <img
                     src={menu.img}
                     alt="메뉴이미지"
@@ -85,7 +93,7 @@ const Menu = () => {
                     height="140px"
                   />
                   <span>{menu.name}</span>
-                </div>
+                </Link>
               ))}
         </div>
       </div>
