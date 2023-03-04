@@ -6,7 +6,7 @@ import { faS, faM, faL } from "@fortawesome/free-solid-svg-icons";
 const MenuDetail = () => {
   const location = useLocation();
   const itemCode = location.state.itemcode;
-  //   console.log(itemCode);
+  // console.log(itemCode);
   return (
     <div className="menuContainer">
       <header className="menuHeader">{itemCode.name}</header>
@@ -35,10 +35,14 @@ const MenuDetail = () => {
         </div>
       </div>
       <footer className="menuFooter">
-        <div>주문금액</div>
-        <div>000 원</div>
-        <button>장바구니</button>
-        <button>바로구매</button>
+        <div className="footerPrice">
+          <div>주문금액</div>
+          <div>000 원</div>
+        </div>
+        <div className="detailBtnContainer">
+          <button>장바구니</button>
+          <button>바로구매</button>
+        </div>
       </footer>
     </div>
   );
