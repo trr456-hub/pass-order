@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faS, faM, faL } from "@fortawesome/free-solid-svg-icons";
 
 const MenuDetail = () => {
+  const [small, setSmall] = useState(0);
   const location = useLocation();
   const itemCode = location.state.itemcode;
   // console.log(itemCode);
+  useEffect(() => {
+    let price = itemCode.price;
+    if (price >= 2000 && price < 3000) {
+      const s = price - 300;
+      setSmall(s);
+    }
+  }, []);
   return (
     <div className="menuContainer">
       <header className="menuHeader">{itemCode.name}</header>
@@ -21,11 +29,11 @@ const MenuDetail = () => {
           <div className="sizeBtnContainer">
             <button>
               <FontAwesomeIcon icon={faS} />
-              <p>(-500)</p>
+              <p>{small}</p>
             </button>
             <button>
               <FontAwesomeIcon icon={faM} />
-              <p>(+0)</p>
+              <p>{itemCode.price}</p>
             </button>
             <button>
               <FontAwesomeIcon icon={faL} />
@@ -37,11 +45,11 @@ const MenuDetail = () => {
       <footer className="menuFooter">
         <div className="footerPrice">
           <div>주문금액</div>
-          <div>000 원</div>
+          <div>0 원</div>
         </div>
         <div className="detailBtnContainer">
-          <button>장바구니</button>
-          <button>바로구매</button>
+          <button>장바구니 담기</button>
+          <button>바로 주문</button>
         </div>
       </footer>
     </div>
