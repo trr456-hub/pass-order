@@ -11,6 +11,7 @@ const Menu = () => {
   const location = useLocation();
   const storeNumber = location.state.storeNumber.name;
 
+  /** 메뉴를 카테고리별로 보여주는 함수 */
   const view = (e) => {
     const target = e.target.innerText;
     if (target === "따듯한커피") {

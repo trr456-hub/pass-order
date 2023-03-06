@@ -14,30 +14,48 @@ const MenuDetail = () => {
   const [small, setSmall] = useState(0);
   /** sizeLarge에 state를 담아주는 hook */
   const [large, setLarge] = useState(0);
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState(1);
+
   const location = useLocation();
   const itemCode = location.state.itemcode;
-  // console.log(itemCode);
 
+  /** 커피의 사이즈를 정해주는 함수 */
   const sizeClick = (e) => {
-    // if (e.target.tagName !== "BUTTON") {
-    //   return;
-    // }
     const btnType = e.target.getAttribute("data-type");
+    /** fontAwesome 은 컴포넌트이며 data-type을 가질수없으므로 부모요소인 button에 data-type을 가지고온다 */
+    const fontType = e.target.parentNode.getAttribute("data-type");
     let price = itemCode.price;
-    if (btnType === "small") {
+    if (btnType === "small" || fontType === "small") {
       price = small;
-    } else if (btnType === "midium") {
+    } else if (btnType === "midium" || fontType === "midium") {
       price = itemCode.price;
-    } else if (btnType === "large") {
+    } else if (btnType === "large" || fontType === "large") {
       price = large;
     }
-    console.log(price);
+    console.log(e.target);
   };
 
+  /** 커피의 수량을 정해주는 함수 */
   const numberClick = (e) => {
-    console.log(e);
+    const btnType = e.target.getAttribute("data-type");
+    const fontType = e.target.parentNode.getAttribute("data-type");
+    if (btnType === "plus" || fontType === "plus") {
+      if (number < 9) {
+        setNumber((prevNumber) => prevNumber + 1);
+      } else {
+        alert("최대수량은 9잔 입니다.");
+        return false;
+      }
+    } else if (btnType === "minus" || fontType === "minus") {
+      if (number > 1) {
+        setNumber((prevNumber) => prevNumber - 1);
+      } else {
+        alert("최소수량은 한잔 입니다.");
+        return false;
+      }
+    }
   };
+
   useEffect(() => {
     /** size small 의 가격을 정의 해주는 함수 */
     const smallPrice = () => {
@@ -87,12 +105,12 @@ const MenuDetail = () => {
         <div className="menuNumber">
           <span>수량</span>
           <div>
-            <button onClick={numberClick}>
-              <FontAwesomeIcon icon={faMinus} />
+            <button onClick={numberClick} data-type="minus">
+              <FontAwesomeIcon icon={faMinus} data-type="minus" />
             </button>
-            <span></span>
-            <button onClick={numberClick}>
-              <FontAwesomeIcon icon={faPlus} />
+            <span>{number}</span>
+            <button onClick={numberClick} data-type="plus">
+              <FontAwesomeIcon icon={faPlus} data-type="plus" />
             </button>
           </div>
         </div>
