@@ -136,6 +136,38 @@ $backColor: #f8f8f8;
   font-size: 15px;
   padding-top: 10px;
 }
+
+// 수량체크
+.menuNumber {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px;
+  margin-bottom: 90px;
+}
+.menuNumber > span {
+  font-size: 17px;
+  padding-left: 30px;
+}
+.menuNumber > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  margin-top: 20px;
+  width: 100%;
+}
+.menuNumber > div > button {
+  padding: 11px;
+  color: white;
+  background-color: $logoColor;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.menuNumber > div > span {
+  font-size: 25px;
+}
+//footer container
 .menuFooter {
   display: flex;
   flex-direction: column;
@@ -153,7 +185,7 @@ $backColor: #f8f8f8;
   justify-content: space-between;
   width: 100%;
   max-width: 450px;
-  padding: 20px 70px;
+  padding: 20px 30px;
 }
 .footerPrice > div:last-child {
   color: red;
@@ -169,7 +201,7 @@ $backColor: #f8f8f8;
 .menuFooter > .detailBtnContainer > button {
   color: black;
   padding: 15px 30px;
-  width: 20vh;
+  width: 21vh;
   border-radius: 10px;
   margin: 0 10px;
 }
