@@ -14,6 +14,7 @@ const MenuDetail = () => {
   const [small, setSmall] = useState(0);
   /** sizeLarge에 state를 담아주는 hook */
   const [large, setLarge] = useState(0);
+  const [number, setNumber] = useState(0);
   const location = useLocation();
   const itemCode = location.state.itemcode;
   // console.log(itemCode);
@@ -34,6 +35,9 @@ const MenuDetail = () => {
     console.log(price);
   };
 
+  const numberClick = (e) => {
+    console.log(e);
+  };
   useEffect(() => {
     /** size small 의 가격을 정의 해주는 함수 */
     const smallPrice = () => {
@@ -83,11 +87,11 @@ const MenuDetail = () => {
         <div className="menuNumber">
           <span>수량</span>
           <div>
-            <button>
+            <button onClick={numberClick}>
               <FontAwesomeIcon icon={faMinus} />
             </button>
-            <span>4</span>
-            <button>
+            <span></span>
+            <button onClick={numberClick}>
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
