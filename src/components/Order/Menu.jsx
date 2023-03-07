@@ -1,12 +1,16 @@
 import { getDatabase, onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
+import Basket from "./Basket";
 
 const Menu = () => {
   const [hotMenus, setHotMenus] = useState([]);
   const [iceMenus, setIceMenus] = useState([]);
   const [viewMenu, setViewMenu] = useState(true);
   const [selectMenu, setSelectMenu] = useState("hot");
+  const [basketOpen, setBasketOpen] = useState(false);
 
   const location = useLocation();
   const storeNumber = location.state.storeNumber.name;
@@ -21,6 +25,11 @@ const Menu = () => {
       setViewMenu(false);
       setSelectMenu("ice");
     }
+  };
+
+  /** 장바구니를 열고닫는 함수 */
+  const handleBasketToggle = () => {
+    setBasketOpen(!basketOpen);
   };
 
   useEffect(() => {
@@ -44,7 +53,13 @@ const Menu = () => {
 
   return (
     <div className="menuContainer">
-      <header className="menuHeader">메뉴선택</header>
+      <header className="menuHeader">
+        <span>메뉴선택</span>
+        <div className="basketFont" onClick={handleBasketToggle}>
+          <FontAwesomeIcon icon={faBasketShopping} />
+        </div>
+        <Basket basketOpen={basketOpen} setBasketOpen={setBasketOpen} />
+      </header>
       <div className="menu">
         <div className="storeComment">
           <span className="comment1">{storeNumber}</span>

@@ -29,7 +29,20 @@ $backColor: #f8f8f8;
   top: 0;
   font-size: 20px;
 }
-
+.backArrow {
+  position: absolute;
+  left: 0;
+  margin-left: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+.basketFont {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
 //menu
 .menu {
   display: flex;
@@ -133,6 +146,11 @@ $backColor: #f8f8f8;
   font-size: 25px;
   width: 70px;
   padding: 10px 0;
+
+  &.clicked {
+    background-color: $logoColor;
+    color: white;
+  }
 }
 .sizeBtnContainer > button > p {
   font-size: 15px;
@@ -165,6 +183,11 @@ $backColor: #f8f8f8;
   background-color: $logoColor;
   border-radius: 10px;
   font-size: 20px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
 }
 .menuNumber > div > span {
   font-size: 25px;
@@ -206,6 +229,11 @@ $backColor: #f8f8f8;
   width: 21vh;
   border-radius: 10px;
   margin: 0 10px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
 }
 .menuFooter > .detailBtnContainer > button:first-child {
   background-color: tan;
@@ -214,4 +242,29 @@ $backColor: #f8f8f8;
 .menuFooter > .detailBtnContainer > button:last-child {
   background-color: $logoColor;
   color: white;
+}
+
+// 장바구니 탭
+.basket {
+  font-family: "Noto Sans KR", sans-serif;
+  position: fixed;
+  top: 0;
+  right: -300px;
+  height: 100%;
+  width: 300px;
+  background-color: white;
+  box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: right 0.5s ease-out;
+
+  &.bOpen {
+    right: 0;
+  }
+}
+.bCloseBtn {
+  display: flex;
+  padding: 10px;
+}
+.bCloseBtn > button {
+  font-size: 30px;
 }

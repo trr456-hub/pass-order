@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faS,
@@ -7,18 +7,37 @@ import {
   faL,
   faPlus,
   faMinus,
+  faBasketShopping,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import Basket from "./Basket";
 
 const MenuDetail = () => {
   /** sizeSmall에 state를 담아주는 hook */
   const [small, setSmall] = useState(0);
-  /** sizeLarge에 state를 담아주는 hook */
+  const [midium, setMidium] = useState(0);
   const [large, setLarge] = useState(0);
   const [number, setNumber] = useState(1);
+  const [clicked, setClicked] = useState(false);
+  const [price, setPrice] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [basketOpen, setBasketOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
 
   const location = useLocation();
   const itemCode = location.state.itemcode;
+  const navigation = useNavigate();
 
+  const menuItem = [
+    {
+      name: itemCode.name,
+      price: total,
+      size: clicked,
+      number: number,
+      img: itemCode.img,
+    },
+  ];
+  console.log(menuItem);
   /** 커피의 사이즈를 정해주는 함수 */
   const sizeClick = (e) => {
     const btnType = e.target.getAttribute("data-type");
@@ -27,12 +46,15 @@ const MenuDetail = () => {
     let price = itemCode.price;
     if (btnType === "small" || fontType === "small") {
       price = small;
+      setClicked("small"); // click state를 변경
     } else if (btnType === "midium" || fontType === "midium") {
-      price = itemCode.price;
+      price = midium;
+      setClicked("midium");
     } else if (btnType === "large" || fontType === "large") {
-      price = large;
+      price = large; //eslint-disable-line no-unused-vars
+      setClicked("large");
     }
-    console.log(e.target);
+    setPrice(price);
   };
 
   /** 커피의 수량을 정해주는 함수 */
@@ -56,6 +78,11 @@ const MenuDetail = () => {
     }
   };
 
+  /** 장바구니 open 함수 */
+  const handleBasketToggle = () => {
+    setBasketOpen(!basketOpen);
+  };
+
   useEffect(() => {
     /** size small 의 가격을 정의 해주는 함수 */
     const smallPrice = () => {
@@ -68,17 +95,37 @@ const MenuDetail = () => {
         setSmall(price - 500);
       }
     };
+    const midiumPrice = () => {
+      const price = itemCode.price;
+      setMidium(price);
+    };
     /** size large 의 가격을 정의 해주는 함수 */
     const largePrice = () => {
       const price = itemCode.price;
       setLarge(price + 1000);
     };
+    const totalPrice = () => {
+      const totalPrice = price * number;
+      setTotal(totalPrice);
+    };
+
     largePrice();
+    midiumPrice();
     smallPrice();
-  }, [itemCode.price]);
+    totalPrice();
+  }, [itemCode.price, number, price]);
   return (
     <div className="menuContainer">
-      <header className="menuHeader">{itemCode.name}</header>
+      <header className="menuHeader">
+        <div onClick={() => navigation(-1)} className="backArrow">
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </div>
+        <span>{itemCode.name}</span>
+        <div className="basketFont" onClick={handleBasketToggle}>
+          <FontAwesomeIcon icon={faBasketShopping} />
+        </div>
+        <Basket basketOpen={basketOpen} setBasketOpen={setBasketOpen} />
+      </header>
       <div className="menuDetail">
         <img
           src={itemCode.img}
@@ -88,15 +135,27 @@ const MenuDetail = () => {
         <div className="sizeContainer">
           <span>SIZE</span>
           <div className="sizeBtnContainer">
-            <button onClick={sizeClick} data-type="small">
+            <button
+              onClick={sizeClick}
+              data-type="small"
+              className={clicked === "small" ? "clicked" : ""}
+            >
               <FontAwesomeIcon icon={faS} data-type="small" />
               <p data-type="small">{small}원</p>
             </button>
-            <button onClick={sizeClick} data-type="midium">
+            <button
+              onClick={sizeClick}
+              data-type="midium"
+              className={clicked === "midium" ? "clicked" : ""}
+            >
               <FontAwesomeIcon icon={faM} data-type="midium" />
-              <p data-type="midium">{itemCode.price}원</p>
+              <p data-type="midium">{midium}원</p>
             </button>
-            <button onClick={sizeClick} data-type="large">
+            <button
+              onClick={sizeClick}
+              data-type="large"
+              className={clicked === "large" ? "clicked" : ""}
+            >
               <FontAwesomeIcon icon={faL} data-type="large" />
               <p data-type="large">{large}원</p>
             </button>
@@ -118,7 +177,7 @@ const MenuDetail = () => {
       <footer className="menuFooter">
         <div className="footerPrice">
           <div>주문금액</div>
-          <div>0 원</div>
+          <div>{total} 원</div>
         </div>
         <div className="detailBtnContainer">
           <button>장바구니 담기</button>
