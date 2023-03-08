@@ -2,10 +2,11 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const Basket = ({ basketOpen, setBasketOpen }) => {
+const Basket = ({ basketOpen, setBasketOpen, cartItem }) => {
   const handleClose = () => {
     setBasketOpen(false);
   };
+  console.log(cartItem);
   return (
     <div className={`basket ${basketOpen ? "bOpen" : ""}`}>
       <div className="bCloseBtn">

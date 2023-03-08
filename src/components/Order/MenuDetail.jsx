@@ -22,22 +22,30 @@ const MenuDetail = () => {
   const [price, setPrice] = useState(0);
   const [total, setTotal] = useState(0);
   const [basketOpen, setBasketOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({});
+  const [selectedItem, setSelectedItem] = useState([]);
 
   const location = useLocation();
   const itemCode = location.state.itemcode;
+  const storeItem = location.state.storeItem;
   const navigation = useNavigate();
 
-  const menuItem = [
-    {
-      name: itemCode.name,
-      price: total,
-      size: clicked,
-      number: number,
-      img: itemCode.img,
+  const menuItem = {
+    name: itemCode.name,
+    price: total,
+    size: clicked,
+    number: number,
+    img: itemCode.img,
+    store: {
+      name: storeItem.name,
+      address: storeItem.address,
     },
-  ];
-  console.log(menuItem);
+  };
+
+  /** arrayobjecct 를 basket 컴포넌트로 넘겨주는 함수 */
+  const handleAddBasket = () => {
+    setSelectedItem([...selectedItem, menuItem]);
+  };
+
   /** 커피의 사이즈를 정해주는 함수 */
   const sizeClick = (e) => {
     const btnType = e.target.getAttribute("data-type");
@@ -124,7 +132,11 @@ const MenuDetail = () => {
         <div className="basketFont" onClick={handleBasketToggle}>
           <FontAwesomeIcon icon={faBasketShopping} />
         </div>
-        <Basket basketOpen={basketOpen} setBasketOpen={setBasketOpen} />
+        <Basket
+          basketOpen={basketOpen}
+          setBasketOpen={setBasketOpen}
+          cartItem={selectedItem}
+        />
       </header>
       <div className="menuDetail">
         <img
@@ -180,7 +192,7 @@ const MenuDetail = () => {
           <div>{total} 원</div>
         </div>
         <div className="detailBtnContainer">
-          <button>장바구니 담기</button>
+          <button onClick={handleAddBasket}>장바구니 담기</button>
           <button>바로 주문</button>
         </div>
       </footer>
