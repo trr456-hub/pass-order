@@ -11,6 +11,8 @@ import {
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import Basket from "./Basket";
+import { addDoc, collection } from "firebase/firestore";
+import { dbService } from "fbase";
 
 const MenuDetail = () => {
   /** sizeSmall에 state를 담아주는 hook */
@@ -42,8 +44,16 @@ const MenuDetail = () => {
   };
 
   /** arrayobjecct 를 basket 컴포넌트로 넘겨주는 함수 */
-  const handleAddBasket = () => {
-    setSelectedItem([...selectedItem, menuItem]);
+  const handleAddBasket = async () => {
+    // setSelectedItem([...selectedItem, menuItem]);
+    try {
+      const docRef = await addDoc(collection(dbService, "Basket"), {
+        menuItem,
+      });
+      console.log(docRef);
+    } catch (error) {
+      console.log("에러내용 : ", error);
+    }
   };
 
   /** 커피의 사이즈를 정해주는 함수 */
