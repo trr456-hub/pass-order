@@ -11,10 +11,10 @@ import {
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import Basket from "./Basket";
-import { addDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
-const MenuDetail = () => {
+const MenuDetail = ({ userObj }) => {
   /** sizeSmall에 state를 담아주는 hook */
   const [small, setSmall] = useState(0);
   const [midium, setMidium] = useState(0);
@@ -30,8 +30,9 @@ const MenuDetail = () => {
   const itemCode = location.state.itemcode;
   const storeItem = location.state.storeItem;
   const navigation = useNavigate();
+  const userId = userObj.uid;
 
-  const menuItem = {
+  const newItem = {
     name: itemCode.name,
     price: total,
     size: clicked,
@@ -45,12 +46,14 @@ const MenuDetail = () => {
 
   /** arrayobjecct 를 basket 컴포넌트로 넘겨주는 함수 */
   const handleAddBasket = async () => {
-    setSelectedItem([...selectedItem, menuItem]);
+    const updateItem = [...selectedItem, newItem];
+    setSelectedItem(updateItem);
+    const docRef = doc(dbService, "Basket", userId);
     try {
-      const docRef = await addDoc(collection(dbService, "Basket"), {
-        item: selectedItem,
+      await setDoc(docRef, {
+        item: updateItem,
       });
-      console.log(docRef);
+      console.log("장바구니 성공");
     } catch (error) {
       console.log("에러내용 : ", error);
     }
