@@ -6,7 +6,7 @@ const Basket = ({ basketOpen, setBasketOpen, cartItem }) => {
   const handleClose = () => {
     setBasketOpen(false);
   };
-  console.log(cartItem);
+
   return (
     <div className={`basket ${basketOpen ? "bOpen" : ""}`}>
       <div className="bCloseBtn">

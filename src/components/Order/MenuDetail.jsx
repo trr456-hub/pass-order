@@ -45,10 +45,10 @@ const MenuDetail = () => {
 
   /** arrayobjecct 를 basket 컴포넌트로 넘겨주는 함수 */
   const handleAddBasket = async () => {
-    // setSelectedItem([...selectedItem, menuItem]);
+    setSelectedItem([...selectedItem, menuItem]);
     try {
       const docRef = await addDoc(collection(dbService, "Basket"), {
-        menuItem,
+        item: selectedItem,
       });
       console.log(docRef);
     } catch (error) {
