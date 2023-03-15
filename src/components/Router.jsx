@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginContainer from "./Login/LoginContainer";
+import LoginHome from "./Login/LoginHome";
 import Home from "./Home/Home";
 import SignUp from "./Login/SignUp";
 import SignIn from "./Login/SignIn";
@@ -27,7 +27,7 @@ const AppRouter = ({ isLoginState, userObj }) => {
           </>
         ) : (
           <>
-            <Route path="/" element={<LoginContainer />} />
+            <Route path="/" element={<LoginHome />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/pwdserch" element={<PwdSerch />} />

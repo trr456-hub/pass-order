@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import "./scss/normalize.scss";
 import "./scss/reset.scss";
 import "./scss/Login/LoginContainer.scss";
