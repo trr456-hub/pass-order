@@ -1,7 +1,7 @@
 /* 액션 타입 선언 */
-const LOGIN_REQUEST = "login/LOGIN_REQUEST";
-const LOGIN_SUCCESS = "login/LOGIN_SUCCESS";
-const LOGIN_FAILURE = "login/LOGIN_FAILURE";
+const LOGIN_REQUEST = "loginHome/LOGIN_REQUEST";
+const LOGIN_SUCCESS = "loginHome/LOGIN_SUCCESS";
+const LOGIN_FAILURE = "loginHome/LOGIN_FAILURE";
 
 /* 액션 함수 정의 */
 export const loginRequest = () => ({
