@@ -8,7 +8,7 @@ import {
 import logo from "assets/logo.png";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const LoginHome = () => {
   const auth = getAuth();
   const navigate = useNavigate();
 
@@ -82,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginHome;

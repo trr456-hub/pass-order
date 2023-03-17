@@ -44,10 +44,9 @@ const MenuDetail = ({ userObj }) => {
     },
   };
 
-  /** arrayobjecct 를 basket 컴포넌트로 넘겨주는 함수 */
+  /** arrayobject 를 basket 컴포넌트로 넘겨주는 함수 */
   const handleAddBasket = async () => {
     const updateItem = [...selectedItem, newItem];
-    setSelectedItem(updateItem);
     const docRef = doc(dbService, "Basket", userId);
     try {
       await setDoc(docRef, {
@@ -57,6 +56,7 @@ const MenuDetail = ({ userObj }) => {
     } catch (error) {
       console.log("에러내용 : ", error);
     }
+    setSelectedItem(updateItem);
   };
 
   /** 커피의 사이즈를 정해주는 함수 */
@@ -148,7 +148,7 @@ const MenuDetail = ({ userObj }) => {
         <Basket
           basketOpen={basketOpen}
           setBasketOpen={setBasketOpen}
-          cartItem={selectedItem}
+          selectedItem={selectedItem}
         />
       </header>
       <div className="menuDetail">

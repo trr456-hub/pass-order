@@ -11,7 +11,7 @@ const PwdSerch = () => {
       target: { value },
     } = e;
     setEmail(value);
-    console.log(value);
+    // console.log(value);
   };
 
   const onSubmit = async (e) => {
