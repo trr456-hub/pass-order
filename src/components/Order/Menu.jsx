@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import Basket from "./Basket";
 
-const Menu = () => {
+const Menu = ({ userObj }) => {
   const [hotMenus, setHotMenus] = useState([]);
   const [iceMenus, setIceMenus] = useState([]);
   const [viewMenu, setViewMenu] = useState(true);

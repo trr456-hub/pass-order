@@ -11,7 +11,7 @@ import {
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import Basket from "./Basket";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
 const MenuDetail = ({ userObj }) => {
@@ -24,7 +24,6 @@ const MenuDetail = ({ userObj }) => {
   const [price, setPrice] = useState(0);
   const [total, setTotal] = useState(0);
   const [basketOpen, setBasketOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState([]);
 
   const location = useLocation();
   const itemCode = location.state.itemcode;
@@ -46,17 +45,22 @@ const MenuDetail = ({ userObj }) => {
 
   /** arrayobject 를 basket 컴포넌트로 넘겨주는 함수 */
   const handleAddBasket = async () => {
-    const updateItem = [...selectedItem, newItem];
     const docRef = doc(dbService, "Basket", userId);
     try {
+      const docSnap = await getDoc(docRef);
+      /** getDoc 함수를 이용하여 이전의 장바구니 아이템을 불러오고 prevItem변수에 저장
+       * exists() 를 이용해서 문서가 존재하는지 확인한 후 문서가 존재하면 true를 반환하고
+       * 그렇지않으면 false를 반환함
+       */
+      const prevItems = docSnap.exists() ? docSnap.data().item : [];
+      const newItems = [...prevItems, newItem];
       await setDoc(docRef, {
-        item: updateItem,
+        item: newItems,
       });
       console.log("장바구니 성공");
     } catch (error) {
       console.log("에러내용 : ", error);
     }
-    setSelectedItem(updateItem);
   };
 
   /** 커피의 사이즈를 정해주는 함수 */
@@ -134,7 +138,7 @@ const MenuDetail = ({ userObj }) => {
     midiumPrice();
     smallPrice();
     totalPrice();
-  }, [itemCode.price, number, price]);
+  }, [itemCode.price, number, price, userObj]);
   return (
     <div className="menuContainer">
       <header className="menuHeader">
@@ -145,11 +149,7 @@ const MenuDetail = ({ userObj }) => {
         <div className="basketFont" onClick={handleBasketToggle}>
           <FontAwesomeIcon icon={faBasketShopping} />
         </div>
-        <Basket
-          basketOpen={basketOpen}
-          setBasketOpen={setBasketOpen}
-          selectedItem={selectedItem}
-        />
+        <Basket basketOpen={basketOpen} setBasketOpen={setBasketOpen} />
       </header>
       <div className="menuDetail">
         <img
