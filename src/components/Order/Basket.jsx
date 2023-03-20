@@ -12,7 +12,7 @@ const Basket = ({ basketOpen, setBasketOpen, userObj }) => {
   const handleClose = () => {
     setBasketOpen(false);
   };
-  const dataDelete = (e, index) => {
+  const dataDelete = (index) => {
     console.log(index);
   };
 
@@ -31,10 +31,10 @@ const Basket = ({ basketOpen, setBasketOpen, userObj }) => {
         </button>
       </div>
       <div>
-        {cartItem.map((item, i) => (
-          <div key={i} style={{ color: "black" }}>
+        {cartItem.map((item, index) => (
+          <div key={index} style={{ color: "black" }}>
             <h1>{item.name}</h1>
-            <button onClick={dataDelete}>
+            <button onClick={() => dataDelete(index)}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
           </div>
