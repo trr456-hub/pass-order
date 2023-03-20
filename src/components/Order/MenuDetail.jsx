@@ -33,6 +33,7 @@ const MenuDetail = ({ userObj }) => {
 
   const newItem = {
     name: itemCode.name,
+    type: itemCode.type,
     price: total,
     size: clicked,
     number: number,
@@ -46,20 +47,24 @@ const MenuDetail = ({ userObj }) => {
   /** arrayobject 를 basket 컴포넌트로 넘겨주는 함수 */
   const handleAddBasket = async () => {
     const docRef = doc(dbService, "Basket", userId);
-    try {
-      const docSnap = await getDoc(docRef);
-      /** getDoc 함수를 이용하여 이전의 장바구니 아이템을 불러오고 prevItem변수에 저장
-       * exists() 를 이용해서 문서가 존재하는지 확인한 후 문서가 존재하면 true를 반환하고
-       * 그렇지않으면 false를 반환함
-       */
-      const prevItems = docSnap.exists() ? docSnap.data().item : [];
-      const newItems = [...prevItems, newItem];
-      await setDoc(docRef, {
-        item: newItems,
-      });
-      console.log("장바구니 성공");
-    } catch (error) {
-      console.log("에러내용 : ", error);
+    if (price !== 0) {
+      try {
+        const docSnap = await getDoc(docRef);
+        /** getDoc 함수를 이용하여 이전의 장바구니 아이템을 불러오고 prevItem변수에 저장
+         * exists() 를 이용해서 문서가 존재하는지 확인한 후 문서가 존재하면 true를 반환하고
+         * 그렇지않으면 false를 반환함
+         */
+        const prevItems = docSnap.exists() ? docSnap.data().item : [];
+        const newItems = [...prevItems, newItem];
+        await setDoc(docRef, {
+          item: newItems,
+        });
+        console.log("장바구니 성공");
+      } catch (error) {
+        console.log("에러내용 : ", error);
+      }
+    } else {
+      alert("사이즈를 선택해 주세요");
     }
   };
 
@@ -149,7 +154,11 @@ const MenuDetail = ({ userObj }) => {
         <div className="basketFont" onClick={handleBasketToggle}>
           <FontAwesomeIcon icon={faBasketShopping} />
         </div>
-        <Basket basketOpen={basketOpen} setBasketOpen={setBasketOpen} />
+        <Basket
+          basketOpen={basketOpen}
+          setBasketOpen={setBasketOpen}
+          userObj={userObj}
+        />
       </header>
       <div className="menuDetail">
         <img

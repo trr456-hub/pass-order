@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Auth } from "fbase";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const handleClose = () => {
@@ -14,6 +15,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     "MY메뉴",
     "매장찾기",
   ];
+  const signOut = () => {
+    Auth.signOut();
+  };
   return (
     <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
       <div className="closeBtn">
@@ -26,6 +30,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <li key={menuItem}>{menuItem}</li>
         ))}
       </ul>
+      <button onClick={signOut}>로그아웃</button>
     </div>
   );
 };

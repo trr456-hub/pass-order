@@ -1,17 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { collection, query } from "firebase/firestore";
+import { faXmark, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { dbService } from "fbase";
+import { doc, onSnapshot } from "firebase/firestore";
 
-const Basket = ({ basketOpen, setBasketOpen }) => {
+const Basket = ({ basketOpen, setBasketOpen, userObj }) => {
+  const [cartItem, setCartItem] = useState([]);
+
+  const userId = userObj.uid;
+
   const handleClose = () => {
     setBasketOpen(false);
   };
+  const dataDelete = (e, index) => {
+    console.log(index);
+  };
+
   useEffect(() => {
-    const q = query(collection(dbService, "Basket"));
-    console.log(q);
-  }, []);
+    onSnapshot(doc(dbService, "Basket", userId), (doc) => {
+      const docData = doc.data();
+      const docArr = docData.item;
+      setCartItem(docArr);
+    });
+  }, [userId]);
   return (
     <div className={`basket ${basketOpen ? "bOpen" : ""}`}>
       <div className="bCloseBtn">
@@ -19,14 +30,15 @@ const Basket = ({ basketOpen, setBasketOpen }) => {
           <FontAwesomeIcon icon={faXmark} />
         </button>
       </div>
-      <div style={{ color: "black" }}>장바구니</div>
       <div>
-        {/* {selectedItem.map((item, i) => (
+        {cartItem.map((item, i) => (
           <div key={i} style={{ color: "black" }}>
-            <span>{item.name}</span>
-            <h2>{item.price}</h2>
+            <h1>{item.name}</h1>
+            <button onClick={dataDelete}>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
           </div>
-        ))} */}
+        ))}
       </div>
     </div>
   );

@@ -59,7 +59,11 @@ const Menu = ({ userObj }) => {
         <div className="basketFont" onClick={handleBasketToggle}>
           <FontAwesomeIcon icon={faBasketShopping} />
         </div>
-        <Basket basketOpen={basketOpen} setBasketOpen={setBasketOpen} />
+        <Basket
+          basketOpen={basketOpen}
+          setBasketOpen={setBasketOpen}
+          userObj={userObj}
+        />
       </header>
       <div className="menu">
         <div className="storeComment">
