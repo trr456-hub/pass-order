@@ -59,7 +59,7 @@ const MenuDetail = ({ userObj }) => {
         await setDoc(docRef, {
           item: newItems,
         });
-        console.log("장바구니 성공");
+        alert("장바구니 추가 완료");
       } catch (error) {
         console.log("에러내용 : ", error);
       }
@@ -76,13 +76,13 @@ const MenuDetail = ({ userObj }) => {
     let price = itemCode.price;
     if (btnType === "small" || fontType === "small") {
       price = small;
-      setClicked("small"); // click state를 변경
+      setClicked("S"); // click state를 변경
     } else if (btnType === "midium" || fontType === "midium") {
       price = midium;
-      setClicked("midium");
+      setClicked("M");
     } else if (btnType === "large" || fontType === "large") {
       price = large; //eslint-disable-line no-unused-vars
-      setClicked("large");
+      setClicked("L");
     }
     setPrice(price);
   };
@@ -154,11 +154,6 @@ const MenuDetail = ({ userObj }) => {
         <div className="basketFont" onClick={handleBasketToggle}>
           <FontAwesomeIcon icon={faBasketShopping} />
         </div>
-        <Basket
-          basketOpen={basketOpen}
-          setBasketOpen={setBasketOpen}
-          userObj={userObj}
-        />
       </header>
       <div className="menuDetail">
         <img
@@ -172,7 +167,7 @@ const MenuDetail = ({ userObj }) => {
             <button
               onClick={sizeClick}
               data-type="small"
-              className={clicked === "small" ? "clicked" : ""}
+              className={clicked === "S" ? "clicked" : ""}
             >
               <FontAwesomeIcon icon={faS} data-type="small" />
               <p data-type="small">{small}원</p>
@@ -180,7 +175,7 @@ const MenuDetail = ({ userObj }) => {
             <button
               onClick={sizeClick}
               data-type="midium"
-              className={clicked === "midium" ? "clicked" : ""}
+              className={clicked === "M" ? "clicked" : ""}
             >
               <FontAwesomeIcon icon={faM} data-type="midium" />
               <p data-type="midium">{midium}원</p>
@@ -188,7 +183,7 @@ const MenuDetail = ({ userObj }) => {
             <button
               onClick={sizeClick}
               data-type="large"
-              className={clicked === "large" ? "clicked" : ""}
+              className={clicked === "L" ? "clicked" : ""}
             >
               <FontAwesomeIcon icon={faL} data-type="large" />
               <p data-type="large">{large}원</p>
@@ -218,6 +213,12 @@ const MenuDetail = ({ userObj }) => {
           <button>바로 주문</button>
         </div>
       </footer>
+      <Basket
+        basketOpen={basketOpen}
+        setBasketOpen={setBasketOpen}
+        userObj={userObj}
+        storeItem={storeItem}
+      />
     </div>
   );
 };

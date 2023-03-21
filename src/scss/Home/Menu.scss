@@ -204,6 +204,7 @@ $backColor: #f8f8f8;
   height: 15vh;
   position: fixed;
   bottom: 0;
+  z-index: 800;
 }
 .footerPrice {
   display: flex;
@@ -242,29 +243,4 @@ $backColor: #f8f8f8;
 .menuFooter > .detailBtnContainer > button:last-child {
   background-color: $logoColor;
   color: white;
-}
-
-// 장바구니 탭
-.basket {
-  font-family: "Noto Sans KR", sans-serif;
-  position: fixed;
-  top: 0;
-  right: -300px;
-  height: 100%;
-  width: 300px;
-  background-color: white;
-  box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  transition: right 0.5s ease-out;
-
-  &.bOpen {
-    right: 0;
-  }
-}
-.bCloseBtn {
-  display: flex;
-  padding: 10px;
-}
-.bCloseBtn > button {
-  font-size: 30px;
 }

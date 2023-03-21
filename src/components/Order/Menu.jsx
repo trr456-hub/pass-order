@@ -63,6 +63,7 @@ const Menu = ({ userObj }) => {
           basketOpen={basketOpen}
           setBasketOpen={setBasketOpen}
           userObj={userObj}
+          storeItem={storeItem}
         />
       </header>
       <div className="menu">

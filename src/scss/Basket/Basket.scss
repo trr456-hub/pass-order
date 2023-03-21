@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
+
+$logoColor: #582f1e;
+$backColor: #f8f8f8;
+
+// 장바구니 탭
+
+// 메인
+.basket {
+  font-family: "Noto Sans KR", sans-serif;
+  position: fixed;
+  top: 0;
+  right: -300px;
+  height: 100%;
+  width: 300px;
+  background-color: #f6f6f6;
+  color: black;
+  box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  transition: right 0.5s ease-out;
+
+  &.bOpen {
+    right: 0;
+  }
+}
+.bStoreName {
+  display: flex;
+  font-size: 19px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.bCloseBtn {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0 10px;
+}
+.bCloseBtn > button {
+  font-size: 30px;
+}
+
+// 상품 정보
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  font-size: 15px;
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+}
+.cartArr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 7px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 3px 0px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.cartElement {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 10px;
+}
+.cartElement > span {
+  color: gray;
+}
+.pnContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 17px;
+}
