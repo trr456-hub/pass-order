@@ -2,6 +2,7 @@
 
 **React.js**의 공부한 것들을 녹여내기위한 PassOrder 프로젝트 입니다. <br>
 <a href="">배포 URL</a>입니다.
+<a href="https://good-elephant-241.notion.site/caf552c96b11425eb314fadddb419b6a">기획단계</a>
 
 ## 🗞️ 개요
 
