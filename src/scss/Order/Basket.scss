@@ -73,3 +73,38 @@ $backColor: #f8f8f8;
   padding: 10px 0;
   font-size: 17px;
 }
+
+// 총 결제금액 주문하기 버튼
+.bOrderTab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 10px;
+  font-size: 16px;
+}
+.bOrderTab > div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+}
+.bOrderTab > div > span {
+  color: red;
+}
+.bOrderTab > a {
+  width: 100%;
+}
+.bOrderTab > a > button {
+  width: 100%;
+  padding: 11px;
+  color: white;
+  background-color: $logoColor;
+  border-radius: 10px;
+  font-size: 20px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
+}
