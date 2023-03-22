@@ -4,3 +4,22 @@ $logoColor: #582f1e;
 $backColor: #f8f8f8;
 
 // patment tab
+.paymentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: $backColor;
+}
+.paymentElement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  padding-top: 7vh;
+  margin: 0 auto;
+}
