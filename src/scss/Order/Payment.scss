@@ -13,6 +13,8 @@ $backColor: #f8f8f8;
   font-family: "Noto Sans KR", sans-serif;
   background-color: $backColor;
 }
+
+// 구매정보 tab
 .paymentElement {
   display: flex;
   flex-direction: column;
@@ -22,4 +24,147 @@ $backColor: #f8f8f8;
   max-width: 450px;
   padding-top: 7vh;
   margin: 0 auto;
+}
+.storeTitle {
+  font-size: 20px;
+  display: flex;
+  width: 100%;
+  margin: 10px;
+  padding-left: 10px;
+}
+.paymentArr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 8px 7px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 3px 0px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+.paymentInf {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 10px;
+}
+.paymentInf > span {
+  color: gray;
+}
+// 요청사항
+.requestComent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  justify-content: center;
+  background-color: white;
+  margin: 8px 7px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.requestComent > h1 {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  margin: 5px;
+  font-size: 15px;
+}
+.requestComent > h1 > span {
+  padding-left: 5px;
+  color: gray;
+  font-size: 13px;
+}
+.requestComent > input {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid gray;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+// 결제 수단
+.sudan {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  justify-content: center;
+  background-color: white;
+  margin: 8px 7px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.sudan > span {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  margin: 5px;
+  font-size: 15px;
+}
+.sudan > div {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  font-size: 20px;
+}
+.sudan > div > h2 {
+  border: 1px solid gray;
+  padding: 10px;
+  width: 13vh;
+  text-align: center;
+  margin-right: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &.card {
+    background-color: gray;
+    border: 1px solid gray;
+    color: white;
+  }
+  &.kakaopay {
+    background-color: #f7e600;
+    border: 1px solid #f7e600;
+    color: #3a1d1d;
+  }
+}
+
+// 총 결제 탭
+.pricePayment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  justify-content: center;
+  background-color: white;
+  margin: 8px 7px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.pricePayment > div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 0 10px;
+  font-size: 15px;
+}
+.pricePayment > h1 {
+  display: flex;
+  margin: 15px 10px;
+  padding: 0 10px;
+}
+.pricePayment > h1 > button {
+  width: 100%;
+  padding: 11px;
+  color: white;
+  background-color: $logoColor;
+  border-radius: 10px;
+  font-size: 20px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
 }
