@@ -112,8 +112,8 @@ $backColor: #f8f8f8;
 }
 .sudan > div > h2 {
   border: 1px solid gray;
-  padding: 10px;
-  width: 13vh;
+  padding: 7px;
+  width: 17vh;
   text-align: center;
   margin-right: 15px;
   border-radius: 10px;
@@ -128,6 +128,11 @@ $backColor: #f8f8f8;
     background-color: #f7e600;
     border: 1px solid #f7e600;
     color: #3a1d1d;
+  }
+  &.test {
+    background-color: $logoColor;
+    border: 1px solid $logoColor;
+    color: white;
   }
 }
 
@@ -154,6 +159,22 @@ $backColor: #f8f8f8;
   display: flex;
   margin: 15px 10px;
   padding: 0 10px;
+}
+.pricePayment > h1 > a {
+  width: 100%;
+}
+.pricePayment > h1 > a > button {
+  width: 100%;
+  padding: 11px;
+  color: white;
+  background-color: $logoColor;
+  border-radius: 10px;
+  font-size: 20px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
 }
 .pricePayment > h1 > button {
   width: 100%;

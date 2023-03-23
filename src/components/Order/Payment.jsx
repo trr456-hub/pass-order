@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { dbService } from "fbase";
 
 const Payment = ({ userObj }) => {
   const [clicked, setClicked] = useState(false);
@@ -11,20 +13,43 @@ const Payment = ({ userObj }) => {
   const location = useLocation();
   const cartItem = location.state.cartItem;
   const storeItem = location.state.storeItem;
-
-  const sudanClick = (e) => {
-    const btnType = e.target.innerText;
-    if (btnType === "카드결제") {
-      setClicked("card");
-    } else {
-      setClicked("kakaopay");
-    }
-  };
+  const storeNumber = storeItem.number;
+  const userId = userObj.uid;
+  console.log(typeof userId);
+  /** 토탈 가격을 구해주는 함수 */
   const totalPrice = useCallback(() => {
     let total = 0;
     cartItem.forEach((e) => (total += e.price));
     setSum(total);
   }, [cartItem]);
+
+  /** 결제수단 구분해주는 함수 */
+  const sudanClick = (e) => {
+    const btnType = e.target.innerText;
+    if (btnType === "카드결제") {
+      setClicked("card");
+    } else if (btnType === "Kakao Pay") {
+      setClicked("kakaopay");
+    } else {
+      setClicked("test");
+    }
+  };
+
+  /** test 결제 버튼이 눌렸을때 실행되는 함수 */
+  const handleTestPayment = async () => {
+    const docRef = doc(dbService, storeNumber, userId);
+    try {
+      const docSnap = await getDoc(docRef);
+      const prevItems = docSnap.exists() ? docSnap.data().order : [];
+      const newItem = [...prevItems, cartItem];
+      await setDoc(docRef, {
+        order: newItem,
+      });
+    } catch (error) {
+      console.log("에러 : ", error);
+    }
+  };
+
   useEffect(() => {
     totalPrice();
   }, [totalPrice]);
@@ -77,6 +102,9 @@ const Payment = ({ userObj }) => {
           >
             Kakao Pay
           </h2>
+          <h2 onClick={sudanClick} className={clicked === "test" ? "test" : ""}>
+            TEST결제
+          </h2>
         </div>
       </div>
       <div className="pricePayment">
@@ -93,7 +121,19 @@ const Payment = ({ userObj }) => {
           <span style={{ color: "red" }}>{sum} 원</span>
         </div>
         <h1>
-          <button>결제 진행</button>
+          {clicked === "card" ? (
+            <button>카드결제</button>
+          ) : clicked === "kakaopay" ? (
+            <button>카카오페이</button>
+          ) : clicked === "test" ? (
+            // <Link to={`/orderList/${userObj.uid}`}>
+            <button onClick={handleTestPayment}>TEST결제</button>
+          ) : (
+            // </Link>
+            <button onClick={() => alert("결제수단을 골라주세요.")}>
+              결제진행
+            </button>
+          )}
         </h1>
       </div>
     </div>
