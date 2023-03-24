@@ -38,10 +38,6 @@ const MenuDetail = ({ userObj }) => {
     size: clicked,
     number: number,
     img: itemCode.img,
-    store: {
-      name: storeItem.name,
-      address: storeItem.address,
-    },
   };
 
   /** arrayobject 를 basket 컴포넌트로 넘겨주는 함수 */

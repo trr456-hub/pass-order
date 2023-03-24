@@ -10,6 +10,7 @@ import Menu from "./Order/Menu";
 import MenuDetail from "./Order/MenuDetail";
 import Payment from "./Order/Payment";
 import OrderList from "./Order/OrderList";
+import NotFound from "./Error/NotFound";
 
 const AppRouter = ({ isLoginState, userObj }) => {
   // console.log(userObj);
@@ -40,6 +41,7 @@ const AppRouter = ({ isLoginState, userObj }) => {
             <Route path="/pwdserch" element={<PwdSerch />} />
           </>
         )}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

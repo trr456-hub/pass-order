@@ -15,6 +15,7 @@ const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem }) => {
   const handleClose = () => {
     setBasketOpen(false);
   };
+
   /** 장바구니의 item 을 삭제하는 함수 */
   const dataDelete = async (index) => {
     const cartRef = doc(dbService, "Basket", userId);

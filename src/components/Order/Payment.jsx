@@ -2,20 +2,30 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
 const Payment = ({ userObj }) => {
   const [clicked, setClicked] = useState(false);
   const [sum, setSum] = useState(0);
+  const [stamps, setStamps] = useState(0);
+  const [request, setRequest] = useState("");
 
   const navigation = useNavigate();
   const location = useLocation();
   const cartItem = location.state.cartItem;
   const storeItem = location.state.storeItem;
-  const storeNumber = storeItem.number;
+  const storeNumber = storeItem.number.toString();
   const userId = userObj.uid;
-  console.log(typeof userId);
+
+  /** 요청사항을 넘겨주는 함수 */
+  const onChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setRequest(value);
+  };
+
   /** 토탈 가격을 구해주는 함수 */
   const totalPrice = useCallback(() => {
     let total = 0;
@@ -23,6 +33,12 @@ const Payment = ({ userObj }) => {
     setSum(total);
   }, [cartItem]);
 
+  /** 스탬프의 개수를 정해주는 함수 */
+  const totalStamps = useCallback(() => {
+    let stamps = 0;
+    cartItem.forEach((e) => (stamps += e.number));
+    setStamps(stamps);
+  }, [cartItem]);
   /** 결제수단 구분해주는 함수 */
   const sudanClick = (e) => {
     const btnType = e.target.innerText;
@@ -39,20 +55,23 @@ const Payment = ({ userObj }) => {
   const handleTestPayment = async () => {
     const docRef = doc(dbService, storeNumber, userId);
     try {
-      const docSnap = await getDoc(docRef);
-      const prevItems = docSnap.exists() ? docSnap.data().order : [];
-      const newItem = [...prevItems, cartItem];
       await setDoc(docRef, {
-        order: newItem,
+        user: userObj.displayName,
+        store: storeItem,
+        order: cartItem,
+        total: sum,
+        stamp: stamps,
+        request: request,
       });
+      console.log("결제완료");
     } catch (error) {
       console.log("에러 : ", error);
     }
   };
-
   useEffect(() => {
     totalPrice();
-  }, [totalPrice]);
+    totalStamps();
+  }, [totalPrice, totalStamps]);
   return (
     <div className="paymentContainer">
       <header className="menuHeader">
@@ -88,7 +107,11 @@ const Payment = ({ userObj }) => {
         <h1>
           요청사항<span> {`(ex. 캐리어 준비해주세요)`}</span>
         </h1>
-        <input type="text" placeholder="요청사항이 있으면 적어주세요." />
+        <input
+          onChange={onChange}
+          type="text"
+          placeholder="요청사항이 있으면 적어주세요."
+        />
       </div>
       <div className="sudan">
         <span>결제수단</span>
@@ -129,7 +152,7 @@ const Payment = ({ userObj }) => {
             // <Link to={`/orderList/${userObj.uid}`}>
             <button onClick={handleTestPayment}>TEST결제</button>
           ) : (
-            // </Link>
+            /* </Link> */
             <button onClick={() => alert("결제수단을 골라주세요.")}>
               결제진행
             </button>
