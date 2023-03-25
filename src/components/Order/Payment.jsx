@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
 const Payment = ({ userObj }) => {
@@ -10,6 +10,7 @@ const Payment = ({ userObj }) => {
   const [sum, setSum] = useState(0);
   const [stamps, setStamps] = useState(0);
   const [request, setRequest] = useState("");
+  const [paymentObj, setPaymentObj] = useState({});
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -68,6 +69,13 @@ const Payment = ({ userObj }) => {
       console.log("에러 : ", error);
     }
   };
+  useEffect(async () => {
+    const docRef = doc(dbService, storeNumber, userId);
+    const docSanp = await getDoc(docRef);
+    const docData = docSanp.data();
+    setPaymentObj(docData);
+    console.log(paymentObj);
+  }, [storeNumber, userId]);
   useEffect(() => {
     totalPrice();
     totalStamps();
@@ -149,10 +157,13 @@ const Payment = ({ userObj }) => {
           ) : clicked === "kakaopay" ? (
             <button>카카오페이</button>
           ) : clicked === "test" ? (
-            // <Link to={`/orderList/${userObj.uid}`}>
-            <button onClick={handleTestPayment}>TEST결제</button>
+            <Link
+              to={`/orderList/${userObj.uid}`}
+              state={{ paymentObj: paymentObj }}
+            >
+              <button onClick={handleTestPayment}>TEST결제</button>
+            </Link>
           ) : (
-            /* </Link> */
             <button onClick={() => alert("결제수단을 골라주세요.")}>
               결제진행
             </button>
