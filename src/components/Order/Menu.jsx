@@ -89,7 +89,7 @@ const Menu = ({ userObj }) => {
           {viewMenu
             ? hotMenus.map((menu) => (
                 <Link
-                  to={`/order/menu/${menu.itemcode}`}
+                  to={`/orderPlaces/menu/${menu.itemcode}`}
                   state={{ itemcode: menu, storeItem: storeItem }}
                   key={menu.itemcode}
                 >
@@ -104,7 +104,7 @@ const Menu = ({ userObj }) => {
               ))
             : iceMenus.map((menu) => (
                 <Link
-                  to={`/order/menu/${menu.itemcode}`}
+                  to={`/orderPlaces/menu/${menu.itemcode}`}
                   state={{ itemcode: menu, storeItem: storeItem }}
                   key={menu.itemcode}
                 >

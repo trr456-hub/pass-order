@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 
 const Payment = ({ userObj }) => {
@@ -10,7 +10,6 @@ const Payment = ({ userObj }) => {
   const [sum, setSum] = useState(0);
   const [stamps, setStamps] = useState(0);
   const [request, setRequest] = useState("");
-  const [paymentObj, setPaymentObj] = useState({});
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -69,13 +68,6 @@ const Payment = ({ userObj }) => {
       console.log("에러 : ", error);
     }
   };
-  useEffect(async () => {
-    const docRef = doc(dbService, storeNumber, userId);
-    const docSanp = await getDoc(docRef);
-    const docData = docSanp.data();
-    setPaymentObj(docData);
-    console.log(paymentObj);
-  }, [storeNumber, userId]);
   useEffect(() => {
     totalPrice();
     totalStamps();
@@ -159,7 +151,7 @@ const Payment = ({ userObj }) => {
           ) : clicked === "test" ? (
             <Link
               to={`/orderList/${userObj.uid}`}
-              state={{ paymentObj: paymentObj }}
+              state={{ storeItem: storeItem }}
             >
               <button onClick={handleTestPayment}>TEST결제</button>
             </Link>

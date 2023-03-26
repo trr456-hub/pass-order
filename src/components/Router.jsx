@@ -4,7 +4,7 @@ import Home from "./Home/Home";
 import SignUp from "./Login/SignUp";
 import SignIn from "./Login/SignIn";
 import PwdSerch from "./Login/PwdSerch";
-import Order from "./Order/Order";
+import OrderPlaces from "./Order/OrderPlaces";
 import Location from "./Location/Location";
 import Menu from "./Order/Menu";
 import MenuDetail from "./Order/MenuDetail";
@@ -20,18 +20,27 @@ const AppRouter = ({ isLoginState, userObj }) => {
         {isLoginState ? (
           <>
             <Route path="/" element={<Home userObj={userObj} />} />
-            <Route path="/order" element={<Order userObj={userObj} />} />
-            <Route path="/location" element={<Location userObj={userObj} />} />
-            <Route path="/order/menu" element={<Menu userObj={userObj} />} />
             <Route
-              path="/order/menu/:itemCode"
+              path="/orderPlaces"
+              element={<OrderPlaces userObj={userObj} />}
+            />
+            <Route path="/location" element={<Location userObj={userObj} />} />
+            <Route
+              path="/orderPlaces/menu"
+              element={<Menu userObj={userObj} />}
+            />
+            <Route
+              path="/orderPlaces/menu/:itemCode"
               element={<MenuDetail userObj={userObj} />}
             />
             <Route
-              path="/order/menu/payment"
+              path="/orderPlaces/menu/payment"
               element={<Payment userObj={userObj} />}
             />
-            <Route path="/orderList/:uid" element={<OrderList />} />
+            <Route
+              path="/orderList/:uid"
+              element={<OrderList userObj={userObj} />}
+            />
           </>
         ) : (
           <>

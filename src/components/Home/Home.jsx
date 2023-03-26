@@ -20,7 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const images = [mainImg1, mainImg2, mainImg3, mainImg4];
 const menu = [
-  { name: "주문", icon: faMugSaucer, url: "/order" },
+  { name: "주문", icon: faMugSaucer, url: "/orderPlaces" },
   { name: "적립내역", icon: faStamp, url: "/history" },
   { name: "MY메뉴", icon: faUser, url: "/menu" },
   { name: "매장찾기", icon: faMapLocation, url: "/location" },

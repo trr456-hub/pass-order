@@ -97,7 +97,7 @@ const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem }) => {
           <span>{sum} 원</span>
         </div>
         <Link
-          to={`/order/menu/payment`}
+          to={`/orderPlaces/menu/payment`}
           state={{ cartItem: cartItem, storeItem: storeItem }}
         >
           <button onClick={paymentMove}>주문하기</button>

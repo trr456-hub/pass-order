@@ -23,7 +23,7 @@ const Order = ({ userObj }) => {
         {stores.map((store) => (
           <div key={store.number}>
             <Link
-              to={`/order/menu`}
+              to={`/orderPlaces/menu`}
               state={{ storeNumber: store }}
               onClick={(e) => {
                 if (window.confirm(`${store.name} 해당 매장에서 주문합니다.`)) {
