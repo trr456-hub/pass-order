@@ -4,3 +4,110 @@ $logoColor: #582f1e;
 $backColor: #f8f8f8;
 
 // orederList tab
+.orderListContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: $backColor;
+}
+.orderListElement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  padding-top: 7vh;
+  margin: 0 auto;
+}
+
+//orderList Store
+.orderListStore {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
+.orderListStore > span {
+  padding-bottom: 10px;
+}
+.orderListStore > h1 {
+  color: gray;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.orderListStore > h1 > span {
+  color: black;
+}
+
+// orderItem
+.orderItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
+.orderItem > span {
+  padding-bottom: 10px;
+}
+.orderitemElement {
+  display: flex;
+  flex-direction: column;
+}
+.orderitemElement > div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+.orderitemElement > div:first-child {
+  background-color: lightgrey;
+  color: #5b5b5b;
+}
+.orderitemElement > div > span {
+  width: 100%;
+  text-align: center;
+}
+.orderitemElement > div > span:first-child {
+  text-align: left;
+}
+// orderListInform
+.orderListInform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
+.orderListInform > span {
+  padding-bottom: 10px;
+}
+.orderListInform > h2 {
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+  padding: 10px 0;
+}
+.orderListInform > h2 > span {
+  color: black;
+}
+
+//orderListComent
+.orderListComent {
+  padding: 20px;
+  font-size: 17px;
+  color: indianred;
+}

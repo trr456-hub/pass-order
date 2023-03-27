@@ -53,7 +53,11 @@ const Home = ({ userObj }) => {
           <div className="logoDiv">
             <img src={homeLogo} alt="홈로고" className="headerLogo" />
           </div>
-          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <Sidebar
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+            userObj={userObj}
+          />
         </div>
       </header>
       <div className="homeContainer">

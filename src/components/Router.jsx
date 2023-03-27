@@ -11,6 +11,7 @@ import MenuDetail from "./Order/MenuDetail";
 import Payment from "./Order/Payment";
 import OrderList from "./Order/OrderList";
 import NotFound from "./Error/NotFound";
+import OrderItem from "./Home/OrderItem";
 
 const AppRouter = ({ isLoginState, userObj }) => {
   // console.log(userObj);
@@ -40,6 +41,10 @@ const AppRouter = ({ isLoginState, userObj }) => {
             <Route
               path="/orderList/:uid"
               element={<OrderList userObj={userObj} />}
+            />
+            <Route
+              path="/orderItem/:uid"
+              element={<OrderItem userObj={userObj} />}
             />
           </>
         ) : (
