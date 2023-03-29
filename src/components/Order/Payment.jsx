@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { dbService } from "fbase";
+import { v4 as uuidv4 } from "uuid";
 
 const Payment = ({ userObj }) => {
   const [clicked, setClicked] = useState(false);
@@ -52,20 +53,31 @@ const Payment = ({ userObj }) => {
   };
 
   /** test 결제 버튼이 눌렸을때 실행되는 함수 */
-  const handleTestPayment = async () => {
+  const handleTestPayment = async (e) => {
     const docRef = doc(dbService, storeNumber, userId);
-    try {
-      await setDoc(docRef, {
-        user: userObj.displayName,
-        store: storeItem,
-        order: cartItem,
-        total: sum,
-        stamp: stamps,
-        request: request,
-      });
-      console.log("결제완료");
-    } catch (error) {
-      console.log("에러 : ", error);
+    const basketRef = doc(dbService, "Basket", userId);
+    const stampRef = doc(dbService, "Stamp", userId);
+    if (window.confirm("결제하시겠습니까?")) {
+      try {
+        await setDoc(docRef, {
+          user: userObj.displayName,
+          store: storeItem,
+          order: cartItem,
+          total: sum,
+          stamp: stamps,
+          request: request,
+        });
+        await deleteDoc(basketRef);
+        await setDoc(stampRef, {
+          time: "12시",
+          stamp: "12개",
+        });
+        console.log("결제완료");
+      } catch (error) {
+        console.log("에러 : ", error);
+      }
+    } else {
+      e.preventDefault();
     }
   };
   useEffect(() => {
@@ -149,13 +161,13 @@ const Payment = ({ userObj }) => {
           ) : clicked === "kakaopay" ? (
             <button>카카오페이</button>
           ) : clicked === "test" ? (
-            <Link
-              to={`/orderList/${userObj.uid}`}
-              state={{ storeItem: storeItem }}
-            >
-              <button onClick={handleTestPayment}>TEST결제</button>
-            </Link>
+            // <Link
+            //   to={`/orderList/${userObj.uid}`}
+            //   state={{ storeItem: storeItem }}
+            // >
+            <button onClick={handleTestPayment}>TEST결제</button>
           ) : (
+            // </Link>
             <button onClick={() => alert("결제수단을 골라주세요.")}>
               결제진행
             </button>

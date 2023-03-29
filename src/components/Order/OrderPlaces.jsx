@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getDatabase, onValue, ref } from "firebase/database";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 const Order = ({ userObj }) => {
   const [stores, setStores] = useState([]);
+
+  const navigation = useNavigate();
 
   useEffect(() => {
     const db = getDatabase();
@@ -18,7 +22,16 @@ const Order = ({ userObj }) => {
 
   return (
     <div className="locationContainer">
-      <header className="locationHeader">매장선택</header>
+      <header className="locationHeader">
+        <div
+          onClick={() => navigation("/")}
+          className="backArrow"
+          style={{ fontSize: 20 }}
+        >
+          <FontAwesomeIcon icon={faHome} />
+        </div>
+        <span>매장선택</span>
+      </header>
       <div className="location">
         {stores.map((store) => (
           <div key={store.number}>

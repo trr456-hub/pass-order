@@ -46,9 +46,13 @@ const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem }) => {
   useEffect(() => {
     onSnapshot(doc(dbService, "Basket", userId), (doc) => {
       const docData = doc.data();
-      const docArr = docData.item;
-      setCartItem(docArr);
-      setInit(true);
+      if (docData) {
+        const docArr = docData.item;
+        setCartItem(docArr);
+        setInit(true);
+      } else {
+        setInit(false);
+      }
     });
   }, [userId]);
   useEffect(() => {

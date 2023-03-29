@@ -11,12 +11,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj }) => {
     setSidebarOpen(false);
   };
   const menuItems = [
-    { storeName: "메뉴소개", url: "" },
+    { storeName: "메뉴소개", url: `/menuInform` },
     { storeName: "적립내역", url: "" },
-    { storeName: "주문", url: "" },
+    { storeName: "주문", url: `/orderPlaces` },
     { storeName: "주문내역", url: `/orderItem/${userId}` },
     { storeName: "MY메뉴", url: "" },
-    { storeName: "매장찾기", url: "" },
+    { storeName: "매장찾기", url: `/location` },
   ];
   const signOut = () => {
     Auth.signOut();
