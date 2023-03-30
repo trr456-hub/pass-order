@@ -1,7 +1,14 @@
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService } from "fbase";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  increment,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,7 +21,7 @@ const OrderList = ({ userObj }) => {
   const storeItem = location.state.storeItem;
   const storeNumber = storeItem.number.toString();
   const userId = userObj.uid;
-  console.log(paymentObj);
+
   /** setDoc의 값을 다시한번읽어서 setPaymentObj state 에 담아준다 */
   useEffect(() => {
     onSnapshot(doc(dbService, storeNumber, userId), (doc) => {
@@ -37,7 +44,7 @@ const OrderList = ({ userObj }) => {
       <div className="orderListElement">
         <div className="orderListStore">
           <span>매장정보</span>
-          {paymentObj.store && (
+          {paymentObj && paymentObj.store && (
             <>
               <h1>
                 매장명<span>{paymentObj.store.name}</span>
@@ -61,7 +68,8 @@ const OrderList = ({ userObj }) => {
               <span>수량</span>
               <span>합계</span>
             </div>
-            {paymentObj.order &&
+            {paymentObj &&
+              paymentObj.order &&
               paymentObj.order.map((item, i) => (
                 <div key={i}>
                   <span>{item.name}</span>
@@ -76,16 +84,16 @@ const OrderList = ({ userObj }) => {
         <div className="orderListInform">
           <span>주문정보</span>
           <h2>
-            닉네임<span>{paymentObj.user}</span>
+            닉네임<span>{paymentObj && paymentObj.user}</span>
           </h2>
           <h2>
-            요청사항<span>{paymentObj.request}</span>
+            요청사항<span>{paymentObj && paymentObj.request}</span>
           </h2>
           <h2>
-            적립스탬프<span>{paymentObj.stamp} 개</span>
+            적립스탬프<span>{paymentObj && paymentObj.stamp} 개</span>
           </h2>
           <h2>
-            결제금액<span>{paymentObj.total} 원</span>
+            결제금액<span>{paymentObj && paymentObj.total} 원</span>
           </h2>
         </div>
         <div className="orderListComent">

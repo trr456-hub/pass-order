@@ -12,6 +12,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { dbService } from "fbase";
+import { getDatabase, onValue, ref } from "firebase/database";
 
 const Payment = ({ userObj }) => {
   const [clicked, setClicked] = useState(false);
@@ -20,6 +21,7 @@ const Payment = ({ userObj }) => {
   const [request, setRequest] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [stores, setStores] = useState([]);
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -85,23 +87,32 @@ const Payment = ({ userObj }) => {
   };
   /** test 결제 버튼이 눌렸을때 실행되는 함수 */
   const handleTestPayment = async (e) => {
-    const docRef = doc(dbService, storeNumber, userId);
-    const basketRef = doc(dbService, "Basket", userId);
-    const stampRef = doc(dbService, "Stamp", userId);
-    const subStampRef = collection(stampRef, "stamp");
-
-    const stampRecordRef = doc(subStampRef, "stmapRecord");
-    const recordSnap = await getDoc(stampRecordRef);
-    const prevRecord = recordSnap.exists() ? recordSnap.data().recordItem : [];
-    const newRecords = [...prevRecord, stampAccumulate];
-
-    const stampAndCouponRef = doc(subStampRef, "stampAndCoupon");
-    const stampAndCouponSnap = await getDoc(stampAndCouponRef);
-    const stampAndCouponData = stampAndCouponSnap.exists()
-      ? stampAndCouponSnap.data()
-      : null;
     if (window.confirm("결제하시겠습니까?")) {
+      const docRef = doc(dbService, storeNumber, userId);
+      const basketRef = doc(dbService, "Basket", userId);
+      const stampRef = doc(dbService, "Stamp", userId);
+      const subStampRef = collection(stampRef, "stamp");
+
+      // 스탬프 적립내역 변수모음
+      const stampRecordRef = doc(subStampRef, "stmapRecord");
+      const recordSnap = await getDoc(stampRecordRef);
+      const prevRecord = recordSnap.exists()
+        ? recordSnap.data().recordItem
+        : [];
+      const newRecords = [...prevRecord, stampAccumulate];
+
+      // 스태프 적립 변수 모음
+      const stampAndCouponRef = doc(subStampRef, "stampAndCoupon");
+      const stampAndCouponSnap = await getDoc(stampAndCouponRef);
+      const stampAndCouponData = stampAndCouponSnap.exists()
+        ? stampAndCouponSnap.data()
+        : null;
+
+      // 기존 주문내역 확인 변수 모음
+      const storesArr = stores.map((item) => item.number.toString());
+      const storeIndex = storesArr.map((item) => doc(dbService, item, userId));
       try {
+        storeIndex.map(async (item) => await deleteDoc(item));
         await setDoc(docRef, {
           user: userObj.displayName,
           store: storeItem,
@@ -131,8 +142,19 @@ const Payment = ({ userObj }) => {
       }
     } else {
       e.preventDefault();
+      return;
     }
   };
+  useEffect(() => {
+    const db = getDatabase();
+    const storesRef = ref(db, "passOrder/stores");
+    //db호출 여 매장정보 프린팅
+    onValue(storesRef, (snapshot) => {
+      const data = snapshot.val();
+      const storesList = Object.values(data);
+      setStores(storesList);
+    });
+  }, []);
   useEffect(() => {
     totalPrice();
     totalStamps();
@@ -219,13 +241,13 @@ const Payment = ({ userObj }) => {
           ) : clicked === "kakaopay" ? (
             <button>카카오페이</button>
           ) : clicked === "test" ? (
-            // <Link
-            //   to={`/orderList/${userObj.uid}`}
-            //   state={{ storeItem: storeItem }}
-            // >
-            <button onClick={handleTestPayment}>TEST결제</button>
+            <Link
+              to={`/orderList/${userObj.uid}`}
+              state={{ storeItem: storeItem }}
+            >
+              <button onClick={handleTestPayment}>TEST결제</button>
+            </Link>
           ) : (
-            // </Link>
             <button onClick={() => alert("결제수단을 골라주세요.")}>
               결제진행
             </button>

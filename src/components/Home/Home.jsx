@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import homeLogo from "assets/homeLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +17,14 @@ import mainImg4 from "assets/main/mainImg4.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { dbService } from "fbase";
+import {
+  collection,
+  doc,
+  getDoc,
+  increment,
+  updateDoc,
+} from "firebase/firestore";
 
 const images = [mainImg1, mainImg2, mainImg3, mainImg4];
 const menu = [
@@ -28,6 +36,10 @@ const menu = [
 
 const Home = ({ userObj }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [stamp, setStamp] = useState(0);
+  const [coupon, setCoupon] = useState(0);
+
+  const userId = userObj.uid;
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
@@ -41,6 +53,34 @@ const Home = ({ userObj }) => {
     arrows: false,
     autoplay: true,
   };
+  useEffect(() => {
+    const getStamps = async () => {
+      const stampRef = doc(dbService, "Stamp", userId);
+      const subStampRef = collection(stampRef, "stamp");
+      const stampAndCouponRef = doc(subStampRef, "stampAndCoupon");
+      const stampSnap = await getDoc(stampAndCouponRef);
+      const stampData = stampSnap.data();
+      if (stampData.stamp > 9 && stampData.stamp < 20) {
+        await updateDoc(stampAndCouponRef, {
+          stamp: increment(-10),
+          coupon: increment(1),
+        });
+      } else if (stampData.stamp > 19 && stampData.stamp < 30) {
+        await updateDoc(stampAndCouponRef, {
+          stamp: increment(-20),
+          coupon: increment(2),
+        });
+      } else if (stampData.stamp > 29) {
+        await updateDoc(stampAndCouponRef, {
+          stamp: increment(-30),
+          coupon: increment(3),
+        });
+      }
+      setStamp(stampData.stamp);
+      setCoupon(stampData.coupon);
+    };
+    getStamps();
+  }, [userId]);
   return (
     <div className="home">
       <header className="homeHeader">
@@ -76,7 +116,8 @@ const Home = ({ userObj }) => {
         </div>
         <div className="informContainer">
           <div className="stamp">
-            <span>내 스탬프 0개</span>
+            <span>내 스탬프 {stamp}개</span>
+            <div className="coupon">내 쿠폰 {coupon}개</div>
             <div className="information">
               {menu.map((item, i) => (
                 <Link to={item.url} key={i} className="menuElement">

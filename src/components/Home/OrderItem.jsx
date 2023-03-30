@@ -27,6 +27,7 @@ const OrderItem = ({ userObj }) => {
       doc.docs.map((d) => d.data())
     );
     const storeSelect = storeData.filter((arr) => arr.length > 0);
+
     // 배열에 요소가 있는지 확인
     if (storeSelect.length > 0) {
       const storeItem = storeSelect[0];
