@@ -2,15 +2,24 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  increment,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { dbService } from "fbase";
-import { v4 as uuidv4 } from "uuid";
 
 const Payment = ({ userObj }) => {
   const [clicked, setClicked] = useState(false);
   const [sum, setSum] = useState(0);
   const [stamps, setStamps] = useState(0);
   const [request, setRequest] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -18,6 +27,23 @@ const Payment = ({ userObj }) => {
   const storeItem = location.state.storeItem;
   const storeNumber = storeItem.number.toString();
   const userId = userObj.uid;
+
+  const dateTime = () => {
+    let today = new Date();
+    let year = today.getFullYear(); // 년
+    let month = today.getMonth(); // 월
+    let date = today.getDate(); // 날짜
+    let day = today.getDay(); // 요일
+    const weekDay = ["일", "월", "화", "수", "목", "금", "토"];
+
+    let hours = String(today.getHours()).padStart(2, "0"); // 시
+    let minutes = String(today.getMinutes()).padStart(2, "0"); // 분
+
+    const getDate = `${year}년/${month}월/${date}일/${weekDay[day]}요일`;
+    const getTime = `${hours}시 ${minutes}분`;
+    setDate(getDate);
+    setTime(getTime);
+  };
 
   /** 요청사항을 넘겨주는 함수 */
   const onChange = (e) => {
@@ -51,12 +77,29 @@ const Payment = ({ userObj }) => {
       setClicked("test");
     }
   };
-
+  /** stamp 에 기록을 재정의 해주는 Object */
+  const stampAccumulate = {
+    stamp: stamps,
+    date: date,
+    time: time,
+  };
   /** test 결제 버튼이 눌렸을때 실행되는 함수 */
   const handleTestPayment = async (e) => {
     const docRef = doc(dbService, storeNumber, userId);
     const basketRef = doc(dbService, "Basket", userId);
     const stampRef = doc(dbService, "Stamp", userId);
+    const subStampRef = collection(stampRef, "stamp");
+
+    const stampRecordRef = doc(subStampRef, "stmapRecord");
+    const recordSnap = await getDoc(stampRecordRef);
+    const prevRecord = recordSnap.exists() ? recordSnap.data().recordItem : [];
+    const newRecords = [...prevRecord, stampAccumulate];
+
+    const stampAndCouponRef = doc(subStampRef, "stampAndCoupon");
+    const stampAndCouponSnap = await getDoc(stampAndCouponRef);
+    const stampAndCouponData = stampAndCouponSnap.exists()
+      ? stampAndCouponSnap.data()
+      : null;
     if (window.confirm("결제하시겠습니까?")) {
       try {
         await setDoc(docRef, {
@@ -68,10 +111,20 @@ const Payment = ({ userObj }) => {
           request: request,
         });
         await deleteDoc(basketRef);
-        await setDoc(stampRef, {
-          time: "12시",
-          stamp: "12개",
+        await setDoc(stampRecordRef, {
+          recordItem: newRecords,
         });
+        if (stampAndCouponData === null) {
+          await setDoc(stampAndCouponRef, {
+            stamp: stamps,
+            coupon: 0,
+          });
+        } else {
+          await updateDoc(stampAndCouponRef, {
+            stamp: increment(stamps),
+            coupon: stampAndCouponData.coupon,
+          });
+        }
         console.log("결제완료");
       } catch (error) {
         console.log("에러 : ", error);
@@ -83,6 +136,7 @@ const Payment = ({ userObj }) => {
   useEffect(() => {
     totalPrice();
     totalStamps();
+    dateTime();
   }, [totalPrice, totalStamps]);
   return (
     <div className="paymentContainer">
@@ -143,6 +197,10 @@ const Payment = ({ userObj }) => {
         </div>
       </div>
       <div className="pricePayment">
+        <div>
+          <span>적립예정스탬프</span>
+          <span>{stamps} 개</span>
+        </div>
         <div>
           <span>상품금액</span>
           <span>{sum} 원</span>
