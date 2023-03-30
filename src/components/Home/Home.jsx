@@ -23,8 +23,10 @@ import {
   doc,
   getDoc,
   increment,
+  onSnapshot,
   updateDoc,
 } from "firebase/firestore";
+import { useCallback } from "react";
 
 const images = [mainImg1, mainImg2, mainImg3, mainImg4];
 const menu = [
@@ -53,6 +55,15 @@ const Home = ({ userObj }) => {
     arrows: false,
     autoplay: true,
   };
+  const snapshot = useCallback(() => {
+    const stampRef = doc(dbService, "Stamp", userId);
+    const subStampRef = collection(stampRef, "stamp");
+    onSnapshot(doc(subStampRef, "stampAndCoupon"), (doc) => {
+      const docData = doc.data();
+      setStamp(docData.stamp);
+      setCoupon(docData.coupon);
+    });
+  }, [userId]);
   useEffect(() => {
     const getStamps = async () => {
       const stampRef = doc(dbService, "Stamp", userId);
@@ -76,11 +87,12 @@ const Home = ({ userObj }) => {
           coupon: increment(3),
         });
       }
-      setStamp(stampData.stamp);
-      setCoupon(stampData.coupon);
     };
     getStamps();
   }, [userId]);
+  useEffect(() => {
+    snapshot();
+  }, [snapshot]);
   return (
     <div className="home">
       <header className="homeHeader">

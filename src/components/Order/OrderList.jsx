@@ -1,14 +1,7 @@
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService } from "fbase";
-import {
-  collection,
-  doc,
-  getDoc,
-  increment,
-  onSnapshot,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
