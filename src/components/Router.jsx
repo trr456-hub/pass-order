@@ -5,14 +5,15 @@ import SignUp from "./Login/SignUp";
 import SignIn from "./Login/SignIn";
 import PwdSerch from "./Login/PwdSerch";
 import OrderPlaces from "./Order/OrderPlaces";
-import Location from "./Location/Location";
+import Location from "./Sidebar/Location";
 import Menu from "./Order/Menu";
 import MenuDetail from "./Order/MenuDetail";
 import Payment from "./Order/Payment";
 import OrderList from "./Order/OrderList";
 import NotFound from "./Error/NotFound";
-import OrderItem from "./Home/OrderItem";
-import MenuInform from "./Home/MenuInform";
+import OrderItem from "./Sidebar/OrderItem";
+import MenuInform from "./Sidebar/MenuInform";
+import OrderHistory from "./Sidebar/OrderHistory";
 
 const AppRouter = ({ isLoginState, userObj }) => {
   // console.log(userObj);
@@ -48,6 +49,10 @@ const AppRouter = ({ isLoginState, userObj }) => {
               element={<OrderItem userObj={userObj} />}
             />
             <Route path="/menuInform" element={<MenuInform />} />
+            <Route
+              path="/orderHistory/:uid"
+              element={<OrderHistory userObj={userObj} />}
+            />
           </>
         ) : (
           <>

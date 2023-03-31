@@ -6,10 +6,10 @@ import {
   faBars,
   faMugSaucer,
   faStamp,
-  faUser,
   faMapLocation,
+  faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import mainImg1 from "assets/main/mainImg1.jpg";
 import mainImg2 from "assets/main/mainImg2.jpg";
 import mainImg3 from "assets/main/mainImg3.jpg";
@@ -29,12 +29,6 @@ import {
 import { useCallback } from "react";
 
 const images = [mainImg1, mainImg2, mainImg3, mainImg4];
-const menu = [
-  { name: "주문", icon: faMugSaucer, url: "/orderPlaces" },
-  { name: "적립내역", icon: faStamp, url: "/history" },
-  { name: "MY메뉴", icon: faUser, url: "/menu" },
-  { name: "매장찾기", icon: faMapLocation, url: "/location" },
-];
 
 const Home = ({ userObj }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -42,6 +36,13 @@ const Home = ({ userObj }) => {
   const [coupon, setCoupon] = useState(0);
 
   const userId = userObj.uid;
+
+  const menu = [
+    { name: "주문", icon: faMugSaucer, url: "/orderPlaces" },
+    { name: "적립내역", icon: faStamp, url: `/orderHistory/${userId}` },
+    { name: "주문내역", icon: faBagShopping, url: `/orderItem/${userId}` },
+    { name: "매장찾기", icon: faMapLocation, url: "/location" },
+  ];
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);

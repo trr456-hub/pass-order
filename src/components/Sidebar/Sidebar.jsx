@@ -12,7 +12,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj }) => {
   };
   const menuItems = [
     { storeName: "메뉴소개", url: `/menuInform` },
-    { storeName: "적립내역", url: "" },
+    { storeName: "적립내역", url: `/orderHistory/${userId}` },
     { storeName: "주문", url: `/orderPlaces` },
     { storeName: "주문내역", url: `/orderItem/${userId}` },
     { storeName: "MY메뉴", url: "" },

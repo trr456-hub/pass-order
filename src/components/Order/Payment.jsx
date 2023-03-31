@@ -30,6 +30,7 @@ const Payment = ({ userObj }) => {
   const storeNumber = storeItem.number.toString();
   const userId = userObj.uid;
 
+  // 현재 년,월,일,요일,시간을 구하는 함수
   const dateTime = () => {
     let today = new Date();
     let year = today.getFullYear(); // 년
@@ -41,8 +42,8 @@ const Payment = ({ userObj }) => {
     let hours = String(today.getHours()).padStart(2, "0"); // 시
     let minutes = String(today.getMinutes()).padStart(2, "0"); // 분
 
-    const getDate = `${year}년/${month}월/${date}일/${weekDay[day]}요일`;
-    const getTime = `${hours}시 ${minutes}분`;
+    const getDate = `${year}년${month + 1}월${date}일/${weekDay[day]}요일`;
+    const getTime = `${hours}시${minutes}분`;
     setDate(getDate);
     setTime(getTime);
   };
@@ -81,6 +82,7 @@ const Payment = ({ userObj }) => {
   };
   /** stamp 에 기록을 재정의 해주는 Object */
   const stampAccumulate = {
+    store: storeItem.name,
     stamp: stamps,
     date: date,
     time: time,
@@ -94,7 +96,7 @@ const Payment = ({ userObj }) => {
       const subStampRef = collection(stampRef, "stamp");
 
       // 스탬프 적립내역 변수모음
-      const stampRecordRef = doc(subStampRef, "stmapRecord");
+      const stampRecordRef = doc(subStampRef, "stampRecord");
       const recordSnap = await getDoc(stampRecordRef);
       const prevRecord = recordSnap.exists()
         ? recordSnap.data().recordItem
