@@ -92,7 +92,7 @@ const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem }) => {
             </div>
           ))
         ) : (
-          <div>장바구니가 비어있다룽..</div>
+          <div className="basketNull">장바구니가 비어있습니다.</div>
         )}
       </div>
       <div className="bOrderTab">

@@ -84,6 +84,32 @@ $backColor: #f8f8f8;
   border-radius: 5px;
 }
 
+// 쿠폰적용
+.coupon {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 450px;
+  justify-content: center;
+  background-color: white;
+  margin: 8px 7px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.coupon > span {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  margin: 5px;
+  font-size: 15px;
+}
+.coupon > select {
+  display: flex;
+  align-items: center;
+  // padding: 0 5px;
+  margin: 5px;
+  font-size: 15px;
+}
 // 결제 수단
 .sudan {
   display: flex;

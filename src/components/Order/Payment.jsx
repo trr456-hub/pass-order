@@ -22,7 +22,9 @@ const Payment = ({ userObj }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [stores, setStores] = useState([]);
-
+  const [coupon, setCoupon] = useState(0);
+  const [couponValue, setCouponValue] = useState(0);
+  console.log(couponValue);
   const navigation = useNavigate();
   const location = useLocation();
   const cartItem = location.state.cartItem;
@@ -69,6 +71,14 @@ const Payment = ({ userObj }) => {
     cartItem.forEach((e) => (stamps += e.number));
     setStamps(stamps);
   }, [cartItem]);
+
+  /** select value를 구해주는 함수 */
+  const changeValue = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setCouponValue(value);
+  };
   /** 결제수단 구분해주는 함수 */
   const sudanClick = (e) => {
     const btnType = e.target.innerText;
@@ -156,7 +166,18 @@ const Payment = ({ userObj }) => {
       const storesList = Object.values(data);
       setStores(storesList);
     });
-  }, []);
+
+    /** 현재 쿠폰의 갯수를 구해주는 함수 */
+    const getCoupon = async () => {
+      const couponRef = doc(dbService, "Stamp", userId);
+      const subCouponRef = collection(couponRef, "stamp");
+      const stampAndCouponRef = doc(subCouponRef, "stampAndCoupon");
+      const couponSnap = await getDoc(stampAndCouponRef);
+      const couponData = couponSnap.data();
+      setCoupon(couponData.coupon);
+    };
+    getCoupon();
+  }, [userId, coupon]);
   useEffect(() => {
     totalPrice();
     totalStamps();
@@ -202,6 +223,24 @@ const Payment = ({ userObj }) => {
           type="text"
           placeholder="요청사항이 있으면 적어주세요."
         />
+      </div>
+      <div className="coupon">
+        <span>쿠폰사용</span>
+        <select onChange={changeValue}>
+          {coupon !== 0 ? (
+            <>
+              <option>쿠폰을 선택해 주세요.</option>
+              {/* Array.from 너 배열이 되어라! */}
+              {Array.from({ length: coupon }).map((item, i) => (
+                <option key={i} value={1}>
+                  아메리카노M 무료쿠폰
+                </option>
+              ))}
+            </>
+          ) : (
+            <option>쿠폰이 없습니다.</option>
+          )}
+        </select>
       </div>
       <div className="sudan">
         <span>결제수단</span>
