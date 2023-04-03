@@ -312,13 +312,13 @@ const Payment = ({ userObj }) => {
           ) : clicked === "kakaopay" ? (
             <button>카카오페이</button>
           ) : clicked === "test" ? (
-            // <Link
-            //   to={`/orderList/${userObj.uid}`}
-            //   state={{ storeItem: storeItem }}
-            // >
-            <button onClick={handleTestPayment}>TEST결제</button>
+            <Link
+              to={`/orderList/${userObj.uid}`}
+              state={{ storeItem: storeItem }}
+            >
+              <button onClick={handleTestPayment}>TEST결제</button>
+            </Link>
           ) : (
-            // </Link>
             <button onClick={() => alert("결제수단을 골라주세요.")}>
               결제진행
             </button>
