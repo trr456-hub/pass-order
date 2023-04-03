@@ -17,6 +17,7 @@ import { getDatabase, onValue, ref } from "firebase/database";
 const Payment = ({ userObj }) => {
   const [clicked, setClicked] = useState(false);
   const [sum, setSum] = useState(0);
+  const [discountSum, setDiscountSum] = useState(0);
   const [stamps, setStamps] = useState(0);
   const [request, setRequest] = useState("");
   const [date, setDate] = useState("");
@@ -24,7 +25,7 @@ const Payment = ({ userObj }) => {
   const [stores, setStores] = useState([]);
   const [coupon, setCoupon] = useState(0);
   const [couponValue, setCouponValue] = useState(0);
-  console.log(couponValue);
+
   const navigation = useNavigate();
   const location = useLocation();
   const cartItem = location.state.cartItem;
@@ -62,8 +63,12 @@ const Payment = ({ userObj }) => {
   const totalPrice = useCallback(() => {
     let total = 0;
     cartItem.forEach((e) => (total += e.price));
-    setSum(total);
-  }, [cartItem]);
+    if (couponValue === "1") {
+      setDiscountSum(total - 2700);
+    } else {
+      setSum(total);
+    }
+  }, [cartItem, couponValue]);
 
   /** 스탬프의 개수를 정해주는 함수 */
   const totalStamps = useCallback(() => {
@@ -79,6 +84,7 @@ const Payment = ({ userObj }) => {
     } = e;
     setCouponValue(value);
   };
+
   /** 결제수단 구분해주는 함수 */
   const sudanClick = (e) => {
     const btnType = e.target.innerText;
@@ -113,7 +119,7 @@ const Payment = ({ userObj }) => {
         : [];
       const newRecords = [...prevRecord, stampAccumulate];
 
-      // 스태프 적립 변수 모음
+      // 스탬프 적립 변수 모음
       const stampAndCouponRef = doc(subStampRef, "stampAndCoupon");
       const stampAndCouponSnap = await getDoc(stampAndCouponRef);
       const stampAndCouponData = stampAndCouponSnap.exists()
@@ -123,16 +129,28 @@ const Payment = ({ userObj }) => {
       // 기존 주문내역 확인 변수 모음
       const storesArr = stores.map((item) => item.number.toString());
       const storeIndex = storesArr.map((item) => doc(dbService, item, userId));
+
       try {
         storeIndex.map(async (item) => await deleteDoc(item));
-        await setDoc(docRef, {
-          user: userObj.displayName,
-          store: storeItem,
-          order: cartItem,
-          total: sum,
-          stamp: stamps,
-          request: request,
-        });
+        if (couponValue === "1") {
+          await setDoc(docRef, {
+            user: userObj.displayName,
+            store: storeItem,
+            order: cartItem,
+            total: discountSum,
+            stamp: stamps,
+            request: request,
+          });
+        } else {
+          await setDoc(docRef, {
+            user: userObj.displayName,
+            store: storeItem,
+            order: cartItem,
+            total: sum,
+            stamp: stamps,
+            request: request,
+          });
+        }
         await deleteDoc(basketRef);
         await setDoc(stampRecordRef, {
           recordItem: newRecords,
@@ -143,9 +161,15 @@ const Payment = ({ userObj }) => {
             coupon: 0,
           });
         } else {
+          if (couponValue === "1") {
+            await updateDoc(stampAndCouponRef, {
+              // stamp: stampAndCouponData.stamp,
+              coupon: increment(-1),
+            });
+          }
           await updateDoc(stampAndCouponRef, {
             stamp: increment(stamps),
-            coupon: stampAndCouponData.coupon,
+            // coupon: stampAndCouponData.coupon,
           });
         }
         console.log("결제완료");
@@ -224,16 +248,16 @@ const Payment = ({ userObj }) => {
           placeholder="요청사항이 있으면 적어주세요."
         />
       </div>
-      <div className="coupon">
+      <div className="couponTap">
         <span>쿠폰사용</span>
         <select onChange={changeValue}>
           {coupon !== 0 ? (
             <>
-              <option>쿠폰을 선택해 주세요.</option>
+              <option value={0}>쿠폰을 선택해 주세요.</option>
               {/* Array.from 너 배열이 되어라! */}
               {Array.from({ length: coupon }).map((item, i) => (
                 <option key={i} value={1}>
-                  아메리카노M 무료쿠폰
+                  아이스 아메리카노L 무료쿠폰
                 </option>
               ))}
             </>
@@ -270,11 +294,17 @@ const Payment = ({ userObj }) => {
         </div>
         <div>
           <span>할인금액</span>
-          <span>-0 원</span>
+          {couponValue !== "1" ? <span>-0 원</span> : <span>-2700 원</span>}
         </div>
         <div style={{ paddingBottom: 25, borderBottom: "1px solid lightGray" }}>
           <span>결제금액</span>
-          <span style={{ color: "red" }}>{sum} 원</span>
+          {couponValue !== "1" ? (
+            <span style={{ color: "red" }}>{sum} 원</span>
+          ) : sum < 2700 ? (
+            <span style={{ color: "red" }}>0 원</span>
+          ) : (
+            <span style={{ color: "red" }}>{discountSum} 원</span>
+          )}
         </div>
         <h1>
           {clicked === "card" ? (
@@ -282,13 +312,13 @@ const Payment = ({ userObj }) => {
           ) : clicked === "kakaopay" ? (
             <button>카카오페이</button>
           ) : clicked === "test" ? (
-            <Link
-              to={`/orderList/${userObj.uid}`}
-              state={{ storeItem: storeItem }}
-            >
-              <button onClick={handleTestPayment}>TEST결제</button>
-            </Link>
+            // <Link
+            //   to={`/orderList/${userObj.uid}`}
+            //   state={{ storeItem: storeItem }}
+            // >
+            <button onClick={handleTestPayment}>TEST결제</button>
           ) : (
+            // </Link>
             <button onClick={() => alert("결제수단을 골라주세요.")}>
               결제진행
             </button>

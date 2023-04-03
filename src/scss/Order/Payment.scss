@@ -85,7 +85,7 @@ $backColor: #f8f8f8;
 }
 
 // 쿠폰적용
-.coupon {
+.couponTap {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -96,14 +96,14 @@ $backColor: #f8f8f8;
   padding: 10px;
   border-radius: 5px;
 }
-.coupon > span {
+.couponTap > span {
   display: flex;
   align-items: center;
   padding: 0 5px;
   margin: 5px;
   font-size: 15px;
 }
-.coupon > select {
+.couponTap > select {
   display: flex;
   align-items: center;
   // padding: 0 5px;
