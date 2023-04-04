@@ -64,7 +64,7 @@ const Payment = ({ userObj }) => {
     let total = 0;
     cartItem.forEach((e) => (total += e.price));
     if (couponValue === "1") {
-      setDiscountSum(total - 2700);
+      total <= 2700 ? setDiscountSum(0) : setDiscountSum(total - 2700);
     } else {
       setSum(total);
     }

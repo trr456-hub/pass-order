@@ -82,6 +82,15 @@ $backColor: #f8f8f8;
   padding-bottom: 15px;
   width: 80%;
 }
+.signOut {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 20px;
+  max-width: 250px;
+  text-align: right;
+  padding: 20px;
+}
 
 //homeContainer
 .homeContainer {

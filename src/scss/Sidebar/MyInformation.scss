@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
+
+$logoColor: #582f1e;
+$backColor: #f8f8f8;
+
+// MyInformation
+.myInformation {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // height: 120vh;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: $backColor;
+  // padding-bottom: 160px;
+}
+//myInformHeader
+.myInformHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $logoColor;
+  color: white;
+  width: 100%;
+  height: 5vh;
+  position: fixed;
+  top: 0;
+  font-size: 20px;
+}
+.backArrow {
+  position: absolute;
+  left: 0;
+  margin-left: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+// myInformContainer
+.myInformContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 450px;
+  padding-top: 7vh;
+  margin: 0 auto;
+}

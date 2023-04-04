@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faS,
@@ -109,6 +109,15 @@ const MenuDetail = ({ userObj }) => {
     setBasketOpen(!basketOpen);
   };
 
+  /** size에 data 가 false일때 실행되는 함수 */
+  const paymentCheck = (e) => {
+    if (clicked === false) {
+      alert("사이즈를 선택해 주세요");
+      e.preventDefault();
+    } else {
+      alert("구매창으로 이동합니다.");
+    }
+  };
   useEffect(() => {
     /** size small 의 가격을 정의 해주는 함수 */
     const smallPrice = () => {
@@ -206,7 +215,13 @@ const MenuDetail = ({ userObj }) => {
         </div>
         <div className="detailBtnContainer">
           <button onClick={handleAddBasket}>장바구니 담기</button>
-          <button>바로 주문</button>
+          <Link
+            onClick={paymentCheck}
+            to={`/orderPlaces/menu/payment`}
+            state={{ cartItem: [newItem], storeItem: storeItem }}
+          >
+            바로 주문
+          </Link>
         </div>
       </footer>
       <Basket

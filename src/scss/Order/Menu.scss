@@ -236,11 +236,24 @@ $backColor: #f8f8f8;
     transform: scale(1.1, 1.1);
   }
 }
-.menuFooter > .detailBtnContainer > button:first-child {
+.menuFooter > .detailBtnContainer > a {
+  color: black;
+  padding: 15px 30px;
+  width: 22vh;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0 10px;
+  transition: transform ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
+}
+.menuFooter > .detailBtnContainer > button {
   background-color: tan;
   color: $logoColor;
 }
-.menuFooter > .detailBtnContainer > button:last-child {
+.menuFooter > .detailBtnContainer > a {
   background-color: $logoColor;
   color: white;
 }

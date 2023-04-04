@@ -82,10 +82,20 @@ const Home = ({ userObj }) => {
           stamp: increment(-20),
           coupon: increment(2),
         });
-      } else if (stampData.stamp > 29) {
+      } else if (stampData.stamp > 29 && stampData.stamp < 40) {
         await updateDoc(stampAndCouponRef, {
           stamp: increment(-30),
           coupon: increment(3),
+        });
+      } else if (stampData.stamp > 39 && stampData.stamp < 50) {
+        await updateDoc(stampAndCouponRef, {
+          stamp: increment(-40),
+          coupon: increment(4),
+        });
+      } else if (stampData.stamp > 49 && stampData.stamp < 60) {
+        await updateDoc(stampAndCouponRef, {
+          stamp: increment(-50),
+          coupon: increment(5),
         });
       }
     };
@@ -129,7 +139,7 @@ const Home = ({ userObj }) => {
         </div>
         <div className="informContainer">
           <div className="stamp">
-            <span>내 스탬프 {stamp}개</span>
+            <span>내 스탬프 {stamp} / 10</span>
             <div className="coupon">내 쿠폰 {coupon}개</div>
             <div className="information">
               {menu.map((item, i) => (

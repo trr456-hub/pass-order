@@ -14,9 +14,9 @@ import NotFound from "./Error/NotFound";
 import OrderItem from "./Sidebar/OrderItem";
 import MenuInform from "./Sidebar/MenuInform";
 import OrderHistory from "./Sidebar/OrderHistory";
+import MyInformation from "./Sidebar/MyInformation";
 
 const AppRouter = ({ isLoginState, userObj }) => {
-  // console.log(userObj);
   return (
     <Router>
       <Routes>
@@ -52,6 +52,10 @@ const AppRouter = ({ isLoginState, userObj }) => {
             <Route
               path="/orderHistory/:uid"
               element={<OrderHistory userObj={userObj} />}
+            />
+            <Route
+              path="/myInformation"
+              element={<MyInformation userObj={userObj} />}
             />
           </>
         ) : (

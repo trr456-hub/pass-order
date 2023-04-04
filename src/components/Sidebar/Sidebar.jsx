@@ -15,7 +15,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj }) => {
     { storeName: "적립내역", url: `/orderHistory/${userId}` },
     { storeName: "주문", url: `/orderPlaces` },
     { storeName: "주문내역", url: `/orderItem/${userId}` },
-    { storeName: "MY메뉴", url: "" },
+    { storeName: "MY메뉴", url: "/myInformation" },
     { storeName: "매장찾기", url: `/location` },
   ];
   const signOut = () => {
@@ -36,7 +36,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj }) => {
           </Link>
         ))}
       </ul>
-      <button onClick={signOut}>로그아웃</button>
+      <button className="signOut" onClick={signOut}>
+        로그아웃
+      </button>
     </div>
   );
 };

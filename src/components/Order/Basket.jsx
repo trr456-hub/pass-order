@@ -37,7 +37,10 @@ const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem }) => {
   }, [cartItem]);
   /** payment 컴포넌트로 이동하는지 묻는 함수 */
   const paymentMove = (e) => {
-    if (window.confirm("결제페이지로 이동합니다.")) {
+    if (cartItem.length === 0) {
+      alert("장바구니가 비어있습니다.");
+      e.preventDefault();
+    } else if (window.confirm("결제 페이지로 이동합니다.")) {
       return;
     } else {
       e.preventDefault();

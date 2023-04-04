@@ -8,6 +8,7 @@ import "./scss/Login/SignUp.scss";
 import "./scss/Home/Home.scss";
 import "./scss/Sidebar/Location.scss";
 import "./scss/Sidebar/OrderHistory.scss";
+import "./scss/Sidebar/MyInformation.scss";
 import "./scss/Order/Menu.scss";
 import "./scss/Order/Basket.scss";
 import "./scss/Order/Payment.scss";
