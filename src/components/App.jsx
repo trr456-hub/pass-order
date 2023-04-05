@@ -7,11 +7,17 @@ const App = () => {
   const [init, setInit] = useState(false);
   const [isLoginState, setIsLoginState] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  const [sellerState, setSellerState] = useState(false);
   useEffect(() => {
     Auth.onAuthStateChanged((user) => {
       if (user) {
-        setIsLoginState(true);
-        setUserObj(user);
+        if (user.email === "trr456@naver.com") {
+          setSellerState(true);
+          setUserObj(user);
+        } else {
+          setIsLoginState(true);
+          setUserObj(user);
+        }
       } else {
         setIsLoginState(false);
       }
@@ -21,7 +27,11 @@ const App = () => {
   return (
     <div>
       {init ? (
-        <Router isLoginState={isLoginState} userObj={userObj} />
+        <Router
+          isLoginState={isLoginState}
+          userObj={userObj}
+          sellerState={sellerState}
+        />
       ) : (
         <img
           src={loding}

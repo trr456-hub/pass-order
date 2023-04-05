@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap");
+
+$logoColor: #582f1e;
+$backColor: #f8f8f8;
+
+// sellerContainer
+.sellerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: $backColor;
+}
+.sellerContainer > h1 {
+  font-size: 30px;
+  padding: 10px;
+  margin: 20px;
+}
+.sellerCategory {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border: 1px solid;
+  border-bottom: none;
+}
+.sellerCategory > span {
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+.orderInfo {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border: 1px solid;
+  border-bottom: none;
+}
+.orderInfo > span {
+  width: 100%;
+  text-align: center;
+}
+.orderInfo > span:last-child {
+  cursor: pointer;
+}
+.orderInfo > select {
+  width: 100%;
+  text-align: center;
+}

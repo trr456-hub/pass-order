@@ -140,6 +140,7 @@ const Payment = ({ userObj }) => {
             total: discountSum,
             stamp: stamps,
             request: request,
+            createdAt: Date.now(),
           });
         } else {
           await setDoc(docRef, {
@@ -149,6 +150,7 @@ const Payment = ({ userObj }) => {
             total: sum,
             stamp: stamps,
             request: request,
+            createdAt: Date.now(),
           });
         }
         await deleteDoc(basketRef);

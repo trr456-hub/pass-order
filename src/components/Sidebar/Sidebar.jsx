@@ -4,7 +4,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Auth } from "fbase";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj }) => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj, stamp, coupon }) => {
   const userId = userObj.uid;
 
   const handleClose = () => {
@@ -18,8 +18,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj }) => {
     { storeName: "MY메뉴", url: "/myInformation" },
     { storeName: "매장찾기", url: `/location` },
   ];
-  const signOut = () => {
-    Auth.signOut();
+  const signOut = (e) => {
+    if (window.confirm("로그아웃 하겠습니까?")) {
+      Auth.signOut();
+    } else {
+      e.preventDefault();
+    }
   };
 
   return (
@@ -31,7 +35,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userObj }) => {
       </div>
       <ul className="menuItem">
         {menuItems.map((menuItem, i) => (
-          <Link key={i} to={menuItem.url}>
+          <Link
+            key={i}
+            to={menuItem.url}
+            state={{ stamp: stamp, coupon: coupon }}
+          >
             <li>{menuItem.storeName}</li>
           </Link>
         ))}

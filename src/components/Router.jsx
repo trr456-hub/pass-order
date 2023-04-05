@@ -1,22 +1,28 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginHome from "./Login/LoginHome";
 import Home from "./Home/Home";
+// 로그인 컴포넌트
+import LoginHome from "./Login/LoginHome";
 import SignUp from "./Login/SignUp";
 import SignIn from "./Login/SignIn";
 import PwdSerch from "./Login/PwdSerch";
+// 구매관련 컴포넌트
 import OrderPlaces from "./Order/OrderPlaces";
-import Location from "./Sidebar/Location";
 import Menu from "./Order/Menu";
 import MenuDetail from "./Order/MenuDetail";
 import Payment from "./Order/Payment";
 import OrderList from "./Order/OrderList";
+// 에러페이지 404
 import NotFound from "./Error/NotFound";
+// 홈 사이드바 컴포넌트
+import Location from "./Sidebar/Location";
 import OrderItem from "./Sidebar/OrderItem";
 import MenuInform from "./Sidebar/MenuInform";
 import OrderHistory from "./Sidebar/OrderHistory";
 import MyInformation from "./Sidebar/MyInformation";
+// 판매자 컴포넌트
+import Seller from "./Seller/Seller";
 
-const AppRouter = ({ isLoginState, userObj }) => {
+const AppRouter = ({ isLoginState, userObj, sellerState }) => {
   return (
     <Router>
       <Routes>
@@ -58,6 +64,8 @@ const AppRouter = ({ isLoginState, userObj }) => {
               element={<MyInformation userObj={userObj} />}
             />
           </>
+        ) : sellerState ? (
+          <Route path="/" element={<Seller userObj={userObj} />} />
         ) : (
           <>
             <Route path="/" element={<LoginHome />} />

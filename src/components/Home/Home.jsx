@@ -34,7 +34,7 @@ const Home = ({ userObj }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [stamp, setStamp] = useState(0);
   const [coupon, setCoupon] = useState(0);
-
+  // console.log("스탬프갯수 : ", stamp, "쿠폰갯수 : ", coupon);
   const userId = userObj.uid;
 
   const menu = [
@@ -120,6 +120,8 @@ const Home = ({ userObj }) => {
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
             userObj={userObj}
+            stamp={stamp}
+            coupon={coupon}
           />
         </div>
       </header>
@@ -139,8 +141,8 @@ const Home = ({ userObj }) => {
         </div>
         <div className="informContainer">
           <div className="stamp">
-            <span>내 스탬프 {stamp} / 10</span>
-            <div className="coupon">내 쿠폰 {coupon}개</div>
+            <span>스탬프 {stamp}/10개</span>
+            <div className="coupon">마이쿠폰 {coupon}개</div>
             <div className="information">
               {menu.map((item, i) => (
                 <Link to={item.url} key={i} className="menuElement">

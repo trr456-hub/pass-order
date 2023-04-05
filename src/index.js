@@ -13,6 +13,7 @@ import "./scss/Order/Menu.scss";
 import "./scss/Order/Basket.scss";
 import "./scss/Order/Payment.scss";
 import "./scss/Order/OrderList.scss";
+import "./scss/Seller/Seller.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
