@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Home/Home";
 // 로그인 컴포넌트
 import LoginHome from "./Login/LoginHome";
@@ -29,64 +24,59 @@ import Seller from "./Seller/Seller";
 
 const AppRouter = ({ isLoginState, userObj, sellerState }) => {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Router>
-        <Routes>
-          {isLoginState ? (
-            <>
-              <Route path="/" element={<Home userObj={userObj} />} />
-              <Route
-                path="/orderPlaces"
-                element={<OrderPlaces userObj={userObj} />}
-              />
-              <Route
-                path="/location"
-                element={<Location userObj={userObj} />}
-              />
-              <Route
-                path="/orderPlaces/menu"
-                element={<Menu userObj={userObj} />}
-              />
-              <Route
-                path="/orderPlaces/menu/:itemCode"
-                element={<MenuDetail userObj={userObj} />}
-              />
-              <Route
-                path="/orderPlaces/menu/payment"
-                element={<Payment userObj={userObj} />}
-              />
-              <Route
-                path="/orderList/:uid"
-                element={<OrderList userObj={userObj} />}
-              />
-              <Route
-                path="/orderItem/:uid"
-                element={<OrderItem userObj={userObj} />}
-              />
-              <Route path="/menuInform" element={<MenuInform />} />
-              <Route
-                path="/orderHistory/:uid"
-                element={<OrderHistory userObj={userObj} />}
-              />
-              <Route
-                path="/myInformation"
-                element={<MyInformation userObj={userObj} />}
-              />
-            </>
-          ) : sellerState ? (
-            <Route path="/" element={<Seller userObj={userObj} />} />
-          ) : (
-            <>
-              <Route path="/" element={<LoginHome />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/pwdserch" element={<PwdSerch />} />
-            </>
-          )}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </BrowserRouter>
+    <Router>
+      <Routes>
+        {isLoginState ? (
+          <>
+            <Route path="/" element={<Home userObj={userObj} />} />
+            <Route
+              path="/orderPlaces"
+              element={<OrderPlaces userObj={userObj} />}
+            />
+            <Route path="/location" element={<Location userObj={userObj} />} />
+            <Route
+              path="/orderPlaces/menu"
+              element={<Menu userObj={userObj} />}
+            />
+            <Route
+              path="/orderPlaces/menu/:itemCode"
+              element={<MenuDetail userObj={userObj} />}
+            />
+            <Route
+              path="/orderPlaces/menu/payment"
+              element={<Payment userObj={userObj} />}
+            />
+            <Route
+              path="/orderList/:uid"
+              element={<OrderList userObj={userObj} />}
+            />
+            <Route
+              path="/orderItem/:uid"
+              element={<OrderItem userObj={userObj} />}
+            />
+            <Route path="/menuInform" element={<MenuInform />} />
+            <Route
+              path="/orderHistory/:uid"
+              element={<OrderHistory userObj={userObj} />}
+            />
+            <Route
+              path="/myInformation"
+              element={<MyInformation userObj={userObj} />}
+            />
+          </>
+        ) : sellerState ? (
+          <Route path="/" element={<Seller userObj={userObj} />} />
+        ) : (
+          <>
+            <Route path="/" element={<LoginHome />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/pwdserch" element={<PwdSerch />} />
+          </>
+        )}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 };
 

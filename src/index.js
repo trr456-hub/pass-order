@@ -14,6 +14,11 @@ import "./scss/Order/Basket.scss";
 import "./scss/Order/Payment.scss";
 import "./scss/Order/OrderList.scss";
 import "./scss/Seller/Seller.scss";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <App />
+  </BrowserRouter>
+);
