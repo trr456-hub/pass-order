@@ -7,15 +7,19 @@ import {
   orderBy,
   query,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import React from "react";
 import { useCallback } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import SellerSidebar from "./SellerSidebar";
 
 const Seller = ({ userObj }) => {
   const [storeData, setStoreData] = useState({});
   const [orderData, setOrderData] = useState([]);
+  const [sellerOpen, setSellerOpen] = useState(false);
+  const [sidebarData, setSidebarData] = useState({});
 
   const storeId = storeData.storeId;
   const userId = userObj.uid;
@@ -60,6 +64,22 @@ const Seller = ({ userObj }) => {
     }
   }, [userId, storeId, getStoreData]);
 
+  const handleSellerToggle = (i) => {
+    setSidebarData(orderData[i]);
+    setSellerOpen(!sellerOpen);
+  };
+
+  const changeValue = async (e, i) => {
+    const {
+      target: { value },
+    } = e;
+    const userCode = orderData[i].creatorId;
+    const q = query(collection(dbService, storeId));
+    const storeDoc = doc(q, userCode);
+    await updateDoc(storeDoc, {
+      orderCall: value,
+    });
+  };
   return (
     <div className="sellerContainer">
       <input type="button" value="logout" onClick={signOut} />
@@ -76,24 +96,20 @@ const Seller = ({ userObj }) => {
           <span>{item.user}</span>
           <span>{item.request}</span>
           <span>{item.total} 원</span>
-          <select>
-            <option>주문확인중</option>
-            <option>픽업준비완료</option>
+          <select onChange={(e) => changeValue(e, i)}>
+            <option value={`준비완료 후 수령 가능`}>
+              준비완료 후 수령 가능
+            </option>
+            <option value={`픽업준비완료`}>픽업준비 완료</option>
           </select>
-          <span>주문상세</span>
-          <div>
-            {item.order.map((item, i) => (
-              <div key={i}>
-                <span>{item.name}</span>
-                <span>{item.number}</span>
-                <span>{item.price}</span>
-                <span>{item.size}</span>
-                <span>{item.type}</span>
-              </div>
-            ))}
-          </div>
+          <span onClick={() => handleSellerToggle(i)}>주문상세</span>
         </div>
       ))}
+      <SellerSidebar
+        sellerOpen={sellerOpen}
+        setSellerOpen={setSellerOpen}
+        sidebarData={sidebarData}
+      />
     </div>
   );
 };

@@ -50,3 +50,69 @@ $backColor: #f8f8f8;
   width: 100%;
   text-align: center;
 }
+
+// sellerSidebar
+.sellerSidebar {
+  font-family: "Noto Sans KR", sans-serif;
+  position: fixed;
+  top: 0;
+  right: -600px;
+  height: 100%;
+  width: 600px;
+  background-color: #f6f6f6;
+  color: black;
+  box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  transition: right 0.5s ease-out;
+
+  &.pOpen {
+    right: 0;
+  }
+}
+.pCloseBtn {
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0 10px;
+}
+.pCloseBtn > button {
+  font-size: 30px;
+}
+
+// sellerSidebarContainer
+.sellerSidebarContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.sellerSidebarContainer > h1 {
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+}
+.sellerSidebarCategory {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-weight: bold;
+}
+.sellerSidebarCategory > span {
+  width: 100%;
+  text-align: center;
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+.sellerSidebarItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+.sellerSidebarItem > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 83px;
+  border-right: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}

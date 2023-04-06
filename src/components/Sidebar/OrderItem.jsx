@@ -76,7 +76,7 @@ const OrderItem = ({ userObj }) => {
             </>
           )}
           <h1>
-            수령시간<span>준비완료 후 수령 가능</span>
+            수령시간<span>{store.orderCall}</span>
           </h1>
         </div>
         <div className="orderItem">

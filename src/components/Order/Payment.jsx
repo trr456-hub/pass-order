@@ -134,6 +134,7 @@ const Payment = ({ userObj }) => {
         storeIndex.map(async (item) => await deleteDoc(item));
         if (couponValue === "1") {
           await setDoc(docRef, {
+            creatorId: userObj.uid,
             user: userObj.displayName,
             store: storeItem,
             order: cartItem,
@@ -141,9 +142,11 @@ const Payment = ({ userObj }) => {
             stamp: stamps,
             request: request,
             createdAt: Date.now(),
+            orderCall: "준비완료 후 수령 가능",
           });
         } else {
           await setDoc(docRef, {
+            creatorId: userObj.uid,
             user: userObj.displayName,
             store: storeItem,
             order: cartItem,
@@ -151,6 +154,7 @@ const Payment = ({ userObj }) => {
             stamp: stamps,
             request: request,
             createdAt: Date.now(),
+            orderCall: "준비완료 후 수령 가능",
           });
         }
         await deleteDoc(basketRef);
