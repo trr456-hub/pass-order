@@ -13,6 +13,12 @@ import {
 } from "firebase/firestore";
 import { dbService } from "fbase";
 import { getDatabase, onValue, ref } from "firebase/database";
+/** 결제수단을 담는 object */
+const paymentMethods = [
+  { parameter: "card", innerText: "카드결제" },
+  { parameter: "kakaopay", innerText: "Kakao Pay" },
+  { parameter: "test", innerText: "TEST결제" },
+];
 
 const Payment = ({ userObj }) => {
   const [clicked, setClicked] = useState(false);
@@ -86,15 +92,8 @@ const Payment = ({ userObj }) => {
   };
 
   /** 결제수단 구분해주는 함수 */
-  const sudanClick = (e) => {
-    const btnType = e.target.innerText;
-    if (btnType === "카드결제") {
-      setClicked("card");
-    } else if (btnType === "Kakao Pay") {
-      setClicked("kakaopay");
-    } else {
-      setClicked("test");
-    }
+  const sudanClick = (method) => {
+    setClicked(method.parameter);
   };
   /** stamp 에 기록을 재정의 해주는 Object */
   const stampAccumulate = {
@@ -113,7 +112,6 @@ const Payment = ({ userObj }) => {
     const basketRef = doc(dbService, "Basket", userId);
     const stampRef = doc(dbService, "Stamp", userId);
     const subStampRef = collection(stampRef, "stamp");
-
     try {
       const [recordSnap, stampAndCouponSnap] = await Promise.all([
         getDoc(doc(subStampRef, "stampRecord")),
@@ -235,18 +233,15 @@ const Payment = ({ userObj }) => {
       <div className="sudan">
         <span>결제수단</span>
         <div>
-          <h2 onClick={sudanClick} className={clicked === "card" ? "card" : ""}>
-            카드결제
-          </h2>
-          <h2
-            onClick={sudanClick}
-            className={clicked === "kakaopay" ? "kakaopay" : ""}
-          >
-            Kakao Pay
-          </h2>
-          <h2 onClick={sudanClick} className={clicked === "test" ? "test" : ""}>
-            TEST결제
-          </h2>
+          {paymentMethods.map((method, i) => (
+            <h2
+              key={i}
+              onClick={() => sudanClick(method)}
+              className={clicked === method.parameter ? method.parameter : ""}
+            >
+              {method.innerText}
+            </h2>
+          ))}
         </div>
       </div>
       <div className="pricePayment">
