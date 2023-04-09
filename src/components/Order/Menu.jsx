@@ -15,6 +15,7 @@ const Menu = ({ userObj }) => {
   const location = useLocation();
   const storeNumber = location.state.storeNumber.name;
   const storeItem = location.state.storeNumber;
+  const coupon = location.state.coupon;
 
   /** 메뉴를 카테고리별로 보여주는 함수 */
   const view = (e) => {
@@ -64,6 +65,7 @@ const Menu = ({ userObj }) => {
           setBasketOpen={setBasketOpen}
           userObj={userObj}
           storeItem={storeItem}
+          coupon={coupon}
         />
       </header>
       <div className="menu">
@@ -90,7 +92,11 @@ const Menu = ({ userObj }) => {
             ? hotMenus.map((menu) => (
                 <Link
                   to={`/orderPlaces/menu/${menu.itemcode}`}
-                  state={{ itemcode: menu, storeItem: storeItem }}
+                  state={{
+                    itemcode: menu,
+                    storeItem: storeItem,
+                    coupon: coupon,
+                  }}
                   key={menu.itemcode}
                 >
                   <img
@@ -105,7 +111,11 @@ const Menu = ({ userObj }) => {
             : iceMenus.map((menu) => (
                 <Link
                   to={`/orderPlaces/menu/${menu.itemcode}`}
-                  state={{ itemcode: menu, storeItem: storeItem }}
+                  state={{
+                    itemcode: menu,
+                    storeItem: storeItem,
+                    coupon: coupon,
+                  }}
                   key={menu.itemcode}
                 >
                   <img

@@ -28,6 +28,7 @@ const MenuDetail = ({ userObj }) => {
   const location = useLocation();
   const itemCode = location.state.itemcode;
   const storeItem = location.state.storeItem;
+  const coupon = location.state.coupon;
   const navigation = useNavigate();
   const userId = userObj.uid;
 
@@ -218,7 +219,11 @@ const MenuDetail = ({ userObj }) => {
           <Link
             onClick={paymentCheck}
             to={`/orderPlaces/menu/payment`}
-            state={{ cartItem: [newItem], storeItem: storeItem }}
+            state={{
+              cartItem: [newItem],
+              storeItem: storeItem,
+              coupon: coupon,
+            }}
           >
             바로 주문
           </Link>
@@ -229,6 +234,7 @@ const MenuDetail = ({ userObj }) => {
         setBasketOpen={setBasketOpen}
         userObj={userObj}
         storeItem={storeItem}
+        coupon={coupon}
       />
     </div>
   );

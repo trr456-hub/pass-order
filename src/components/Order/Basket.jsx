@@ -5,7 +5,7 @@ import { dbService } from "fbase";
 import { doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
-const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem }) => {
+const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem, coupon }) => {
   const [init, setInit] = useState(false);
   const [cartItem, setCartItem] = useState([]);
   const [sum, setSum] = useState(0);
@@ -105,7 +105,7 @@ const Basket = ({ basketOpen, setBasketOpen, userObj, storeItem }) => {
         </div>
         <Link
           to={`/orderPlaces/menu/payment`}
-          state={{ cartItem: cartItem, storeItem: storeItem }}
+          state={{ cartItem: cartItem, storeItem: storeItem, coupon: coupon }}
         >
           <button onClick={paymentMove}>주문하기</button>
         </Link>

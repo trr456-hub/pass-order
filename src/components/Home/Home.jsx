@@ -24,6 +24,7 @@ import {
   getDoc,
   increment,
   onSnapshot,
+  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { useCallback } from "react";
@@ -34,14 +35,28 @@ const Home = ({ userObj }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [stamp, setStamp] = useState(0);
   const [coupon, setCoupon] = useState(0);
-  // console.log("스탬프갯수 : ", stamp, "쿠폰갯수 : ", coupon);
   const userId = userObj.uid;
 
   const menu = [
-    { name: "주문", icon: faMugSaucer, url: "/orderPlaces" },
-    { name: "적립내역", icon: faStamp, url: `/orderHistory/${userId}` },
-    { name: "주문내역", icon: faBagShopping, url: `/orderItem/${userId}` },
-    { name: "매장찾기", icon: faMapLocation, url: "/location" },
+    {
+      name: "주문",
+      icon: faMugSaucer,
+      url: "/orderPlaces",
+      state: { coupon: coupon },
+    },
+    {
+      name: "적립내역",
+      icon: faStamp,
+      url: `/orderHistory/${userId}`,
+      state: {},
+    },
+    {
+      name: "주문내역",
+      icon: faBagShopping,
+      url: `/orderItem/${userId}`,
+      state: {},
+    },
+    { name: "매장찾기", icon: faMapLocation, url: "/location", state: {} },
   ];
 
   const handleSidebarToggle = () => {
@@ -70,29 +85,49 @@ const Home = ({ userObj }) => {
       const stampRef = doc(dbService, "Stamp", userId);
       const subStampRef = collection(stampRef, "stamp");
       const stampAndCouponRef = doc(subStampRef, "stampAndCoupon");
-      const stampSnap = await getDoc(stampAndCouponRef);
-      const stampData = stampSnap.data();
-      if (stampData.stamp > 9 && stampData.stamp < 20) {
+      const stampAndCouponSnap = await getDoc(stampAndCouponRef);
+      const stampAndCouponData = stampAndCouponSnap.exists()
+        ? stampAndCouponSnap.data()
+        : null;
+      if (stampAndCouponData === null) {
+        await setDoc(stampAndCouponRef, {
+          stamp: 0,
+          coupon: 0,
+        });
+      }
+      if (stampAndCouponData.stamp > 9 && stampAndCouponData.stamp < 20) {
         await updateDoc(stampAndCouponRef, {
           stamp: increment(-10),
           coupon: increment(1),
         });
-      } else if (stampData.stamp > 19 && stampData.stamp < 30) {
+      } else if (
+        stampAndCouponData.stamp > 19 &&
+        stampAndCouponData.stamp < 30
+      ) {
         await updateDoc(stampAndCouponRef, {
           stamp: increment(-20),
           coupon: increment(2),
         });
-      } else if (stampData.stamp > 29 && stampData.stamp < 40) {
+      } else if (
+        stampAndCouponData.stamp > 29 &&
+        stampAndCouponData.stamp < 40
+      ) {
         await updateDoc(stampAndCouponRef, {
           stamp: increment(-30),
           coupon: increment(3),
         });
-      } else if (stampData.stamp > 39 && stampData.stamp < 50) {
+      } else if (
+        stampAndCouponData.stamp > 39 &&
+        stampAndCouponData.stamp < 50
+      ) {
         await updateDoc(stampAndCouponRef, {
           stamp: increment(-40),
           coupon: increment(4),
         });
-      } else if (stampData.stamp > 49 && stampData.stamp < 60) {
+      } else if (
+        stampAndCouponData.stamp > 49 &&
+        stampAndCouponData.stamp < 60
+      ) {
         await updateDoc(stampAndCouponRef, {
           stamp: increment(-50),
           coupon: increment(5),
@@ -145,7 +180,12 @@ const Home = ({ userObj }) => {
             <div className="coupon">마이쿠폰 {coupon}개</div>
             <div className="information">
               {menu.map((item, i) => (
-                <Link to={item.url} key={i} className="menuElement">
+                <Link
+                  to={item.url}
+                  key={i}
+                  className="menuElement"
+                  state={item.state}
+                >
                   <div className="menuBox">
                     <FontAwesomeIcon icon={item.icon} />
                   </div>

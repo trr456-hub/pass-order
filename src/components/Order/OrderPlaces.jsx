@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getDatabase, onValue, ref } from "firebase/database";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 const Order = ({ userObj }) => {
   const [stores, setStores] = useState([]);
 
+  const location = useLocation();
+  const coupon = location.state.coupon;
   const navigation = useNavigate();
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const Order = ({ userObj }) => {
           <div key={store.number}>
             <Link
               to={`/orderPlaces/menu`}
-              state={{ storeNumber: store }}
+              state={{ storeNumber: store, coupon: coupon }}
               onClick={(e) => {
                 if (window.confirm(`${store.name} 해당 매장에서 주문합니다.`)) {
                   return;
