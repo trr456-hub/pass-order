@@ -1,26 +1,26 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./Home/Home";
+import Home from "./home/Home";
 // 로그인 컴포넌트
-import LoginHome from "./Login/LoginHome";
-import SignUp from "./Login/SignUp";
-import SignIn from "./Login/SignIn";
-import PwdSerch from "./Login/PwdSerch";
+import LoginHome from "./login/LoginHome";
+import SignUp from "./login/SignUp";
+import SignIn from "./login/SignIn";
+import PwdSerch from "./login/PwdSerch";
 // 구매관련 컴포넌트
-import OrderPlaces from "./Order/OrderPlaces";
-import Menu from "./Order/Menu";
-import MenuDetail from "./Order/MenuDetail";
-import Payment from "./Order/Payment";
-import OrderList from "./Order/OrderList";
+import OrderPlaces from "./order/OrderPlaces";
+import Menu from "./order/Menu";
+import MenuDetail from "./order/MenuDetail";
+import Payment from "./order/Payment";
+import OrderList from "./order/OrderList";
 // 에러페이지 404
-import NotFound from "./Error/NotFound";
+import NotFound from "./error/NotFound";
 // 홈 사이드바 컴포넌트
-import Location from "./Sidebar/Location";
-import OrderItem from "./Sidebar/OrderItem";
-import MenuInform from "./Sidebar/MenuInform";
-import OrderHistory from "./Sidebar/OrderHistory";
-import MyInformation from "./Sidebar/MyInformation";
+import Location from "./sidebar/Location";
+import OrderItem from "./sidebar/OrderItem";
+import MenuInform from "./sidebar/MenuInform";
+import OrderHistory from "./sidebar/OrderHistory";
+import MyInformation from "./sidebar/MyInformation";
 // 판매자 컴포넌트
-import Seller from "./Seller/Seller";
+import Seller from "./seller/Seller";
 
 const AppRouter = ({ isLoginState, userObj, sellerState }) => {
   return (

@@ -9,11 +9,11 @@ import {
   faMapLocation,
   faBagShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "../Sidebar/Sidebar";
-import mainImg1 from "assets/main/mainImg1.jpg";
-import mainImg2 from "assets/main/mainImg2.jpg";
-import mainImg3 from "assets/main/mainImg3.jpg";
-import mainImg4 from "assets/main/mainImg4.jpg";
+import Sidebar from "../sidebar/Sidebar";
+import mainImg1 from "assets/img/mainImg1.jpg";
+import mainImg2 from "assets/img/mainImg2.jpg";
+import mainImg3 from "assets/img/mainImg3.jpg";
+import mainImg4 from "assets/img/mainImg4.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
