@@ -1,7 +1,9 @@
-# 📜 React-For-PassOrder
+# 📜 저렴다방
 
-**React.js**의 공부한 것들을 녹여내기위한 PassOrder 프로젝트 입니다. <br>
-<a href="">배포 URL</a>입니다. <br>
+**React.js**의 공부한 것들을 녹여내기위한 PassOrder 프로젝트 입니다.
+<br>
+<a href="gorhf9397.github.io/pass-order">배포 URL</a>입니다.
+<br>
 <a href="https://good-elephant-241.notion.site/caf552c96b11425eb314fadddb419b6a">기획 및 프로젝트에 목표</a>입니다.
 
 ## 🗞️ 개요
