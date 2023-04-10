@@ -129,7 +129,7 @@ const Payment = ({ userObj }) => {
       const storesArr = stores.map((item) => item.number.toString());
       const storeIndex = storesArr.map((item) => doc(dbService, item, userId));
       // 결제시 추가되는 데이터 처리 모음
-      await Promise.all([
+      Promise.all([
         storeIndex.map(async (item) => await deleteDoc(item)),
         setDoc(docRef, {
           creatorId: userObj.uid,

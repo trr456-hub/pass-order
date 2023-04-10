@@ -42,13 +42,11 @@ const Menu = ({ userObj }) => {
     onValue(hotMenusRef, (snapshot) => {
       const data = snapshot.val();
       const hotMenusList = Object.values(data);
-      // console.log("따듯한메뉴 : ", hotMenusList);
       setHotMenus(hotMenusList);
     });
     onValue(iceMenusRef, (snapshot) => {
       const data = snapshot.val();
       const iceMenusList = Object.values(data);
-      // console.log("아이스메뉴 : ", iceMenusList);
       setIceMenus(iceMenusList);
     });
   }, []);
