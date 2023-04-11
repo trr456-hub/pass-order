@@ -123,6 +123,96 @@
 | :-------------------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://user-images.githubusercontent.com/108771927/230912574-0cc5f3d7-6f2c-479d-9b4c-b6768d1f9695.jpg" width="280px"/> |
 
-## 🔎 기능설명
+## 🔎 개발일정
 
-어떤 기능이 있고 데이터에 연결방식이 어떻게 됐나 서술---
+- 기간: 2023.02.20 ~ 2023.04.06 <br>
+
+  - 프로젝트 구상
+  - 요구사항분석
+  - reference 조사
+  - 구현 순서 결정
+
+- 폴더트리
+
+```
+pass-order
+├─ .git
+├─ .gitignore
+├─ .vscode
+│  └─ extensions.json
+├─ jsconfig.json
+├─ package.json
+├─ public
+│  └─ index.html
+├─ README.md
+└─ src
+   ├─ assets
+   │  ├─ coffee.png
+   │  ├─ giphy.gif
+   │  ├─ homeLogo.png
+   │  ├─ img
+   │  │  ├─ mainImg1.jpg
+   │  │  ├─ mainImg2.jpg
+   │  │  ├─ mainImg3.jpg
+   │  │  └─ mainImg4.jpg
+   │  ├─ logo.png
+   │  └─ order
+   │     └─ kakaopay.jpg
+   ├─ components
+   │  ├─ App.jsx
+   │  ├─ Error
+   │  │  └─ NotFound.jsx
+   │  ├─ Home
+   │  │  └─ Home.jsx
+   │  ├─ Login
+   │  │  ├─ LoginHome.jsx
+   │  │  ├─ PwdSerch.jsx
+   │  │  ├─ SignIn.jsx
+   │  │  └─ SignUp.jsx
+   │  ├─ Order
+   │  │  ├─ Basket.jsx
+   │  │  ├─ Menu.jsx
+   │  │  ├─ MenuDetail.jsx
+   │  │  ├─ OrderList.jsx
+   │  │  ├─ OrderPlaces.jsx
+   │  │  └─ Payment.jsx
+   │  ├─ Router.jsx
+   │  ├─ Seller
+   │  │  ├─ Seller.jsx
+   │  │  └─ SellerSidebar.jsx
+   │  └─ Sidebar
+   │     ├─ Location.jsx
+   │     ├─ MenuInform.jsx
+   │     ├─ MyInformation.jsx
+   │     ├─ OrderHistory.jsx
+   │     ├─ OrderItem.jsx
+   │     └─ Sidebar.jsx
+   ├─ container
+   ├─ db
+   │  ├─ localhost.webarchive
+   │  └─ passorder-db.json
+   ├─ fbase.js
+   ├─ index.js
+   └─ scss
+      ├─ Error
+      │  └─ Error.scss
+      ├─ Home
+      │  └─ Home.scss
+      ├─ Login
+      │  ├─ LoginContainer.scss
+      │  └─ SignUp.scss
+      ├─ normalize.scss
+      ├─ Order
+      │  ├─ Basket.scss
+      │  ├─ Menu.scss
+      │  ├─ OrderList.scss
+      │  └─ Payment.scss
+      ├─ reset.scss
+      ├─ Seller
+      │  └─ Seller.scss
+      └─ Sidebar
+         ├─ Location.scss
+         ├─ MyInformation.scss
+         └─ OrderHistory.scss
+
+```
