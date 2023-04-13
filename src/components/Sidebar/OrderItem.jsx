@@ -2,7 +2,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { dbService } from "fbase";
 import { getDatabase, onValue, ref } from "firebase/database";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,23 +16,26 @@ const OrderItem = ({ userObj }) => {
 
   const querySnapshot = useCallback(async () => {
     const storesArr = stores.map((item) => item.number.toString());
-    const storeIndex = storesArr.map((item) =>
-      query(collection(dbService, item), where("user", "==", userId))
-    );
-    // Promise.all() 메서드를 사용해 storeIndex 상점 인덱스에 대한 getDocs 함수 호출의 결과를 기다림
-    const storeCollection = await Promise.all(
-      storeIndex.map(async (item) => await getDocs(item))
-    );
-    const storeData = storeCollection.map((doc) =>
-      doc.docs.map((d) => d.data())
-    );
-    const storeSelect = storeData.filter((arr) => arr.length > 0);
+    storesArr.map((item) => {
+      const q = query(collection(dbService, item), where("user", "==", userId));
+      return onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => setStore(doc.data()));
+      });
+    });
+    // // Promise.all() 메서드를 사용해 storeIndex 상점 인덱스에 대한 getDocs 함수 호출의 결과를 기다림
+    // const storeCollection = await Promise.all(
+    //   storeIndex.map(async (item) => await getDocs(item))
+    // );
+    // const storeData = storeCollection.map((doc) =>
+    //   doc.docs.map((d) => d.data())
+    // );
+    // const storeSelect = storeData.filter((arr) => arr.length > 0);
 
-    // 배열에 요소가 있는지 확인
-    if (storeSelect.length > 0) {
-      const storeItem = storeSelect[0];
-      setStore(storeItem[0]);
-    }
+    // // 배열에 요소가 있는지 확인
+    // if (storeSelect.length > 0) {
+    //   const storeItem = storeSelect[0];
+    //   setStore(storeItem[0]);
+    // }
   }, [stores, userId]);
 
   useEffect(() => {
