@@ -22,20 +22,6 @@ const OrderItem = ({ userObj }) => {
         querySnapshot.forEach((doc) => setStore(doc.data()));
       });
     });
-    // // Promise.all() 메서드를 사용해 storeIndex 상점 인덱스에 대한 getDocs 함수 호출의 결과를 기다림
-    // const storeCollection = await Promise.all(
-    //   storeIndex.map(async (item) => await getDocs(item))
-    // );
-    // const storeData = storeCollection.map((doc) =>
-    //   doc.docs.map((d) => d.data())
-    // );
-    // const storeSelect = storeData.filter((arr) => arr.length > 0);
-
-    // // 배열에 요소가 있는지 확인
-    // if (storeSelect.length > 0) {
-    //   const storeItem = storeSelect[0];
-    //   setStore(storeItem[0]);
-    // }
   }, [stores, userId]);
 
   useEffect(() => {
