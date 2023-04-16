@@ -122,9 +122,7 @@ const Payment = ({ userObj }) => {
       const newRecords = [...prevRecord, stampAccumulate];
       // 스탬프 적립 변수 모음
       const stampAndCouponData = stampAndCouponSnap?.data() || {};
-      const { stamp: currentStamp = 0, coupon: currentCoupon = 0 } =
-        stampAndCouponData;
-      console.log(currentStamp);
+      const { coupon: currentCoupon = 0 } = stampAndCouponData;
       // 기존 주문내역 확인 변수 모음
       const storesArr = stores.map((item) => item.number.toString());
       const storeIndex = storesArr.map((item) => doc(dbService, item, userId));
