@@ -81,6 +81,13 @@ const Home = ({ userObj }) => {
     });
   }, [userId]);
   useEffect(() => {
+    const stampAndCouponMapping = {
+      10: { stamp: 10, coupon: 1 },
+      20: { stamp: 20, coupon: 2 },
+      30: { stamp: 30, coupon: 3 },
+      40: { stamp: 40, coupon: 4 },
+      50: { stamp: 50, coupon: 5 },
+    };
     const getStamps = async () => {
       const stampRef = doc(dbService, "Stamp", userId);
       const subStampRef = collection(stampRef, "stamp");
@@ -95,43 +102,17 @@ const Home = ({ userObj }) => {
           coupon: 0,
         });
       }
-      if (stampAndCouponData.stamp > 9 && stampAndCouponData.stamp < 20) {
-        await updateDoc(stampAndCouponRef, {
-          stamp: increment(-10),
-          coupon: increment(1),
-        });
-      } else if (
-        stampAndCouponData.stamp > 19 &&
-        stampAndCouponData.stamp < 30
-      ) {
-        await updateDoc(stampAndCouponRef, {
-          stamp: increment(-20),
-          coupon: increment(2),
-        });
-      } else if (
-        stampAndCouponData.stamp > 29 &&
-        stampAndCouponData.stamp < 40
-      ) {
-        await updateDoc(stampAndCouponRef, {
-          stamp: increment(-30),
-          coupon: increment(3),
-        });
-      } else if (
-        stampAndCouponData.stamp > 39 &&
-        stampAndCouponData.stamp < 50
-      ) {
-        await updateDoc(stampAndCouponRef, {
-          stamp: increment(-40),
-          coupon: increment(4),
-        });
-      } else if (
-        stampAndCouponData.stamp > 49 &&
-        stampAndCouponData.stamp < 60
-      ) {
-        await updateDoc(stampAndCouponRef, {
-          stamp: increment(-50),
-          coupon: increment(5),
-        });
+      for (let key in stampAndCouponMapping) {
+        if (
+          stampAndCouponData.stamp > parseInt(key) - 10 &&
+          stampAndCouponData.stamp < parseInt(key)
+        ) {
+          await updateDoc(stampAndCouponRef, {
+            stamp: increment(stampAndCouponMapping[key].stamp),
+            coupon: increment(stampAndCouponMapping[key].coupon),
+          });
+          break;
+        }
       }
     };
     getStamps();
