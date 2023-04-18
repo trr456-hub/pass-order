@@ -82,11 +82,11 @@ const Home = ({ userObj }) => {
   }, [userId]);
   useEffect(() => {
     const stampAndCouponMapping = {
-      10: { stamp: 10, coupon: 1 },
-      20: { stamp: 20, coupon: 2 },
-      30: { stamp: 30, coupon: 3 },
-      40: { stamp: 40, coupon: 4 },
-      50: { stamp: 50, coupon: 5 },
+      10: { stamp: 9, endStamp: 20, coupon: 1, minorStamp: 10 },
+      20: { stamp: 19, endStamp: 30, coupon: 2, minorStamp: 20 },
+      30: { stamp: 29, endStamp: 40, coupon: 3, minorStamp: 30 },
+      40: { stamp: 39, endStamp: 50, coupon: 4, minorStamp: 40 },
+      50: { stamp: 49, endStamp: 60, coupon: 5, minorStamp: 50 },
     };
     const getStamps = async () => {
       const stampRef = doc(dbService, "Stamp", userId);
@@ -103,12 +103,14 @@ const Home = ({ userObj }) => {
         });
       }
       for (let key in stampAndCouponMapping) {
+        const stamp = stampAndCouponMapping[key].stamp;
+        const endStamp = stampAndCouponMapping[key].endStamp;
         if (
-          stampAndCouponData.stamp > parseInt(key) - 10 &&
-          stampAndCouponData.stamp < parseInt(key)
+          stampAndCouponData.stamp > stamp &&
+          stampAndCouponData.stamp < endStamp
         ) {
           await updateDoc(stampAndCouponRef, {
-            stamp: increment(stampAndCouponMapping[key].stamp),
+            stamp: increment(-stampAndCouponMapping[key].minorStamp),
             coupon: increment(stampAndCouponMapping[key].coupon),
           });
           break;
