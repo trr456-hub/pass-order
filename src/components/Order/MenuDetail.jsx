@@ -150,6 +150,16 @@ const MenuDetail = ({ userObj }) => {
     smallPrice();
     totalPrice();
   }, [itemCode.price, number, price, userObj]);
+  const sizeItem = [
+    {
+      type: "small",
+      sclicked: "S",
+      clicked: "clicked",
+      icon: faS,
+      price: small,
+    },
+  ];
+  console.log(sizeItem);
   return (
     <div className="menuContainer">
       <header className="menuHeader">
