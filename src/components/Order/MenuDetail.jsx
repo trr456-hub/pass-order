@@ -150,16 +150,17 @@ const MenuDetail = ({ userObj }) => {
     smallPrice();
     totalPrice();
   }, [itemCode.price, number, price, userObj]);
-  const sizeItem = [
-    {
-      type: "small",
-      sclicked: "S",
-      clicked: "clicked",
-      icon: faS,
-      price: small,
-    },
-  ];
-  console.log(sizeItem);
+  const sizes = ["small", "midium", "large"];
+  const icons = [faS, faM, faL];
+  const clickSize = ["S", "M", "L"];
+  const prices = [small, midium, large];
+  const sizeItem = sizes.map((size, i) => ({
+    type: size,
+    sclicked: clickSize[i],
+    clicked: "clicked",
+    icons: icons[i],
+    price: prices[i],
+  }));
   return (
     <div className="menuContainer">
       <header className="menuHeader">
@@ -180,30 +181,17 @@ const MenuDetail = ({ userObj }) => {
         <div className="sizeContainer">
           <span>SIZE</span>
           <div className="sizeBtnContainer">
-            <button
-              onClick={sizeClick}
-              data-type="small"
-              className={clicked === "S" ? "clicked" : ""}
-            >
-              <FontAwesomeIcon icon={faS} data-type="small" />
-              <p data-type="small">{small}원</p>
-            </button>
-            <button
-              onClick={sizeClick}
-              data-type="midium"
-              className={clicked === "M" ? "clicked" : ""}
-            >
-              <FontAwesomeIcon icon={faM} data-type="midium" />
-              <p data-type="midium">{midium}원</p>
-            </button>
-            <button
-              onClick={sizeClick}
-              data-type="large"
-              className={clicked === "L" ? "clicked" : ""}
-            >
-              <FontAwesomeIcon icon={faL} data-type="large" />
-              <p data-type="large">{large}원</p>
-            </button>
+            {sizeItem.map((item, i) => (
+              <button
+                onClick={sizeClick}
+                data-type={item.type}
+                className={clicked === item.sclicked ? "clicked" : ""}
+                key={i}
+              >
+                <FontAwesomeIcon icon={item.icons} data-type={item.type} />
+                <p data-type={item.type}>{item.price}원</p>
+              </button>
+            ))}
           </div>
         </div>
         <div className="menuNumber">
