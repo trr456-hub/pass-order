@@ -37,27 +37,21 @@ const Home = ({ userObj }) => {
   const [coupon, setCoupon] = useState(0);
   const userId = userObj.uid;
 
-  const menu = [
-    {
-      name: "주문",
-      icon: faMugSaucer,
-      url: "/orderPlaces",
-      state: { coupon: coupon },
-    },
-    {
-      name: "적립내역",
-      icon: faStamp,
-      url: `/orderHistory/${userId}`,
-      state: {},
-    },
-    {
-      name: "주문내역",
-      icon: faBagShopping,
-      url: `/orderItem/${userId}`,
-      state: {},
-    },
-    { name: "매장찾기", icon: faMapLocation, url: "/location", state: {} },
+  const menuName = ["주문", "적립내역", "주문내역", "매장찾기"];
+  const icons = [faMugSaucer, faStamp, faBagShopping, faMapLocation];
+  const urls = [
+    `/orderPlaces`,
+    `/orderHistory/${userId}`,
+    `/orderItem/${userId}`,
+    "/location",
   ];
+  const states = [{ coupon: coupon }, {}, {}, {}];
+  const menu = menuName.map((item, i) => ({
+    name: item,
+    icon: icons[i],
+    url: urls[i],
+    state: states[i],
+  }));
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
