@@ -104,10 +104,21 @@ const Payment = ({ userObj }) => {
     date: date,
     time: time,
   };
+
+  /** 카카오페이 결제 버튼에 들어가는 함수 */
+  const handlePayment = async () => {
+    const itemName = "Example Item";
+    const amount = 1000;
+
+    const data = await initiatePayment(amount, itemName);
+
+    if (data && data.next_redirect_pc_url) {
+      setPaymentUrl(data.next_redirect_pc_url);
+    }
+  };
   /** 카카오페이 POST 요청을 보내 결제를 시작하는 함수 */
   const initiatePayment = async (amount, itemName) => {
-    const url = "/v1/payment/ready";
-
+    const url = "https://kapi.kakao.com/v1/payment/ready";
     try {
       const response = await axios({
         method: "post",
@@ -129,23 +140,12 @@ const Payment = ({ userObj }) => {
           fail_url: "http://localhost:3000/fail",
         },
       });
-
       return response.data;
     } catch (error) {
       console.error(error);
     }
   };
-  /** 카카오페이 결제 버튼에 들어가는 함수 */
-  const handlePayment = async () => {
-    const itemName = "Example Item";
-    const amount = 1000; // in KRW
 
-    const data = await initiatePayment(amount, itemName);
-
-    if (data && data.next_redirect_pc_url) {
-      setPaymentUrl(data.next_redirect_pc_url);
-    }
-  };
   /** test 결제 버튼이 눌렸을때 실행되는 함수 */
   const handleTestPayment = async (e) => {
     if (!window.confirm("결제하시겠습니까?")) {
@@ -328,14 +328,9 @@ const Payment = ({ userObj }) => {
           )}
         </h1>
       </div>
-      {paymentUrl && (
-        <iframe
-          title="KakaoPay Payment"
-          src={paymentUrl}
-          width="100%"
-          height="600px"
-        />
-      )}
+      {paymentUrl ? (
+        <iframe src={paymentUrl} width="100%" height="799" />
+      ) : null}
     </div>
   );
 };
