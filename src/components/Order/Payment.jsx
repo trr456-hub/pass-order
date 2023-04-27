@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { dbService } from "fbase";
 import { getDatabase, onValue, ref } from "firebase/database";
+import axios from "axios";
 /** 결제수단을 담는 object */
 const paymentMethods = [
   { parameter: "card", innerText: "카드결제" },
@@ -30,6 +31,7 @@ const Payment = ({ userObj }) => {
   const [time, setTime] = useState("");
   const [stores, setStores] = useState([]);
   const [couponValue, setCouponValue] = useState(0);
+  const [paymentUrl, setPaymentUrl] = useState(null);
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -101,6 +103,48 @@ const Payment = ({ userObj }) => {
     stamp: stamps,
     date: date,
     time: time,
+  };
+  /** 카카오페이 POST 요청을 보내 결제를 시작하는 함수 */
+  const initiatePayment = async (amount, itemName) => {
+    const url = "/v1/payment/ready";
+
+    try {
+      const response = await axios({
+        method: "post",
+        url: url,
+        headers: {
+          Authorization: `KakaoAK a2d820d17e17e705c74b314c76016e5d`,
+          "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+        data: {
+          cid: "TC0ONETIME",
+          partner_order_id: "partner_order_id",
+          partner_user_id: "partner_user_id",
+          item_name: itemName,
+          quantity: 1,
+          total_amount: amount,
+          tax_free_amount: 0,
+          approval_url: "http://localhost:3000/approval",
+          cancel_url: "http://localhost:3000/cancel",
+          fail_url: "http://localhost:3000/fail",
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  /** 카카오페이 결제 버튼에 들어가는 함수 */
+  const handlePayment = async () => {
+    const itemName = "Example Item";
+    const amount = 1000; // in KRW
+
+    const data = await initiatePayment(amount, itemName);
+
+    if (data && data.next_redirect_pc_url) {
+      setPaymentUrl(data.next_redirect_pc_url);
+    }
   };
   /** test 결제 버튼이 눌렸을때 실행되는 함수 */
   const handleTestPayment = async (e) => {
@@ -269,7 +313,7 @@ const Payment = ({ userObj }) => {
           {clicked === "card" ? (
             <button>카드결제</button>
           ) : clicked === "kakaopay" ? (
-            <button>카카오페이</button>
+            <button onClick={handlePayment}>카카오페이</button>
           ) : clicked === "test" ? (
             <Link
               to={`/orderList/${userObj.uid}`}
@@ -284,6 +328,14 @@ const Payment = ({ userObj }) => {
           )}
         </h1>
       </div>
+      {paymentUrl && (
+        <iframe
+          title="KakaoPay Payment"
+          src={paymentUrl}
+          width="100%"
+          height="600px"
+        />
+      )}
     </div>
   );
 };
