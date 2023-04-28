@@ -13,7 +13,6 @@ import {
 } from "firebase/firestore";
 import { dbService } from "fbase";
 import { getDatabase, onValue, ref } from "firebase/database";
-import axios from "axios";
 /** 결제수단을 담는 object */
 const paymentMethods = [
   { parameter: "card", innerText: "카드결제" },
@@ -39,6 +38,7 @@ const Payment = ({ userObj }) => {
   const couponData = location.state.coupon;
   const storeNumber = storeItem.number.toString();
   const userId = userObj.uid;
+  const navigate = useNavigate();
 
   // 현재 년,월,일,요일,시간을 구하는 함수
   const dateTime = () => {
@@ -104,39 +104,79 @@ const Payment = ({ userObj }) => {
     time: time,
   };
 
+  /* 스크립트 태그를 동적으로 삽입*/
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.iamport.kr/v1/iamport.js";
+    script.async = true;
+    document.body.appendChild(script);
+  });
   /** 카카오페이 결제 버튼에 들어가는 함수 */
-  const handlePayment = () => {
+  const kakaopayHandlePayment = () => {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
     IMP.init("imp35452464");
     /* 2. 결제 데이터 정의하기 */
     const data = {
-      pg: "kakaopay",
-      pay_method: "card",
-      merchant_uid: "merchant",
-      name: "저렴다방",
-      amount: `3000원`,
-      buyer_name: "none",
-      buyer_tel: "none",
-      buyer_postcode: "123-456",
+      pg: "kakaopay", // PG사
+      pay_method: "kakaopay", // 결제수단
+      merchant_uid: `${userId}_${new Date().getTime()}`, // 주문번호
+      amount: couponValue === "1" ? discountSum : sum, // 결제금액
+      name: "저렴다방", // 주문명
+      buyer_name: userObj.displayName, // 구매자 이름
+      buyer_email: userObj.email, // 구매자 이메일
     };
     /* 4. 결제 창 호출하기 */
     IMP.request_pay(data, callback);
   };
-  const callback = (response) => {
-    const { success, merchant_uid, error_msg } = response;
+
+  /** 카드 결제 버튼에 들어가는 함수 */
+  const cardHandlePayment = () => {
+    /* 1. 가맹점 식별하기 */
+    const { IMP } = window;
+    IMP.init("imp35452464");
+    /* 2. 결제 데이터 정의하기 */
+    const data = {
+      pg: "html5_inicis", // PG사
+      pay_method: "card", // 결제수단
+      merchant_uid: `${userId}_${new Date().getTime()}`, // 주문번호
+      amount: couponValue === "1" ? discountSum : sum, // 결제금액
+      name: "저렴다방", // 주문명
+      buyer_name: userObj.displayName, // 구매자 이름
+      buyer_email: userObj.email, // 구매자 이메일
+    };
+    /* 4. 결제 창 호출하기 */
+    IMP.request_pay(data, callback);
+  };
+
+  /* 3. 콜백 함수 정의하기 */
+  function callback(response) {
+    const { success, error_msg } = response;
     if (success) {
       alert("결제 성공");
+      dbAccess();
+      navigate(`/orderItem/${userId}`);
     } else {
-      alert(`결제 실패: ${error_msg}`);
+      if (couponValue === "1" && discountSum === 0) {
+        alert("결제금액이 0원이므로 결제 완료 페이지로 이동합니다.");
+        dbAccess();
+        navigate(`/orderItem/${userId}`);
+      } else {
+        alert(`결제 실패: ${error_msg}`);
+      }
+    }
+  }
+  /** 테스트 결제가 눌렸을때 실행되는 함수 */
+  const handleTestPayment = (e) => {
+    const confirmed = window.confirm("결제를 진행 하시겠습니까?");
+    if (confirmed) {
+      dbAccess();
+    } else {
+      e.preventDefault();
     }
   };
-  /** test 결제 버튼이 눌렸을때 실행되는 함수 */
-  const handleTestPayment = async (e) => {
-    if (!window.confirm("결제하시겠습니까?")) {
-      e.preventDefault();
-      return;
-    }
+  /** db에 접속하여 db를 수정하는 함수 */
+  const dbAccess = async () => {
     const docRef = doc(dbService, storeNumber, userId);
     const basketRef = doc(dbService, "Basket", userId);
     const stampRef = doc(dbService, "Stamp", userId);
@@ -296,9 +336,9 @@ const Payment = ({ userObj }) => {
         </div>
         <h1>
           {clicked === "card" ? (
-            <button>카드결제</button>
+            <button onClick={cardHandlePayment}>카드결제</button>
           ) : clicked === "kakaopay" ? (
-            <button onClick={handlePayment}>카카오페이</button>
+            <button onClick={kakaopayHandlePayment}>카카오페이</button>
           ) : clicked === "test" ? (
             <Link
               to={`/orderList/${userObj.uid}`}
