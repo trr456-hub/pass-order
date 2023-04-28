@@ -31,7 +31,6 @@ const Payment = ({ userObj }) => {
   const [time, setTime] = useState("");
   const [stores, setStores] = useState([]);
   const [couponValue, setCouponValue] = useState(0);
-  const [paymentUrl, setPaymentUrl] = useState(null);
 
   const navigation = useNavigate();
   const location = useLocation();
@@ -106,46 +105,32 @@ const Payment = ({ userObj }) => {
   };
 
   /** 카카오페이 결제 버튼에 들어가는 함수 */
-  const handlePayment = async () => {
-    const itemName = "Example Item";
-    const amount = 1000;
-
-    const data = await initiatePayment(amount, itemName);
-
-    if (data && data.next_redirect_pc_url) {
-      setPaymentUrl(data.next_redirect_pc_url);
+  const handlePayment = () => {
+    /* 1. 가맹점 식별하기 */
+    const { IMP } = window;
+    IMP.init("imp35452464");
+    /* 2. 결제 데이터 정의하기 */
+    const data = {
+      pg: "kakaopay",
+      pay_method: "card",
+      merchant_uid: "merchant",
+      name: "저렴다방",
+      amount: `3000원`,
+      buyer_name: "none",
+      buyer_tel: "none",
+      buyer_postcode: "123-456",
+    };
+    /* 4. 결제 창 호출하기 */
+    IMP.request_pay(data, callback);
+  };
+  const callback = (response) => {
+    const { success, merchant_uid, error_msg } = response;
+    if (success) {
+      alert("결제 성공");
+    } else {
+      alert(`결제 실패: ${error_msg}`);
     }
   };
-  /** 카카오페이 POST 요청을 보내 결제를 시작하는 함수 */
-  const initiatePayment = async (amount, itemName) => {
-    const url = "https://kapi.kakao.com/v1/payment/ready";
-    try {
-      const response = await axios({
-        method: "post",
-        url: url,
-        headers: {
-          Authorization: `KakaoAK a2d820d17e17e705c74b314c76016e5d`,
-          "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-        },
-        data: {
-          cid: "TC0ONETIME",
-          partner_order_id: "partner_order_id",
-          partner_user_id: "partner_user_id",
-          item_name: itemName,
-          quantity: 1,
-          total_amount: amount,
-          tax_free_amount: 0,
-          approval_url: "http://localhost:3000/approval",
-          cancel_url: "http://localhost:3000/cancel",
-          fail_url: "http://localhost:3000/fail",
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   /** test 결제 버튼이 눌렸을때 실행되는 함수 */
   const handleTestPayment = async (e) => {
     if (!window.confirm("결제하시겠습니까?")) {
@@ -328,9 +313,6 @@ const Payment = ({ userObj }) => {
           )}
         </h1>
       </div>
-      {paymentUrl ? (
-        <iframe src={paymentUrl} width="100%" height="799" />
-      ) : null}
     </div>
   );
 };
