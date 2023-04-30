@@ -131,7 +131,8 @@
         },
         "name": "저렴다방 백석점",
         "number": 1001,
-        "address": "경기도 고양시 일산동구 백석동 1308"
+        "address": "경기도 고양시 일산동구 백석동 1308",
+        "link": "http://kko.to/RGdQcRPHrV"
       },
       "store2": {
         "menu": {
@@ -139,7 +140,8 @@
         },
         "name": "저렴다방 풍동점",
         "number": 1002,
-        "address": "경기도 고양시 일산동구 풍동 1273-2"
+        "address": "경기도 고양시 일산동구 풍동 1273-2",
+        "link": "http://kko.to/-BMIu3lfF7"
       },
       "store3": {
         "menu": {
@@ -147,7 +149,8 @@
         },
         "name": "저렴다방 은평점",
         "number": 1003,
-        "address": "서울특별시 은평구 구산동 1-1"
+        "address": "서울특별시 은평구 구산동 1-1",
+        "link": "http://kko.to/x-6QtsnfU0"
       },
       "store4": {
         "menu": {
@@ -155,7 +158,8 @@
         },
         "name": "저렴다방 파주점",
         "number": 1004,
-        "address": "경기도 파주시 금촌동 958-9"
+        "address": "경기도 파주시 금촌동 958-9",
+        "link": "http://kko.to/ktnDFc15BZ"
       },
       "store5": {
         "menu": {
@@ -163,7 +167,8 @@
         },
         "name": "저렴다방 강남점",
         "number": 1005,
-        "address": "서울특별시 강남구 역삼동 825"
+        "address": "서울특별시 강남구 역삼동 825",
+        "link": "http://kko.to/y-AI-Btq5H"
       },
       "store6": {
         "menu": {
@@ -171,7 +176,8 @@
         },
         "name": "저렴다방 화정점",
         "number": 1006,
-        "address": "경기도 고양시 덕양구 화정동 978-2"
+        "address": "경기도 고양시 덕양구 화정동 978-2",
+        "link": "http://kko.to/XMmnRF_ioy"
       },
       "store7": {
         "menu": {
@@ -179,7 +185,8 @@
         },
         "name": "저렴다방 종로점",
         "number": 1007,
-        "address": "서울특별시 종로구 세종로 161-1"
+        "address": "서울특별시 종로구 세종로 161-1",
+        "link": "http://kko.to/XLzG9cq1bh"
       },
       "store8": {
         "menu": {
@@ -187,7 +194,8 @@
         },
         "name": "저렴다방 화곡점",
         "number": 1008,
-        "address": "서울특별시 강서구 화곡동 1076-19"
+        "address": "서울특별시 강서구 화곡동 1076-19",
+        "link": "http://kko.to/MTrn7DmHfy"
       }
     }
   }

@@ -36,7 +36,7 @@ const Location = () => {
       <div className="location">
         {stores.map((store) => (
           <div key={store.number}>
-            <Link>
+            <Link to={store.link}>
               <h2>{store.name}</h2>
               <h3>{store.address}</h3>
             </Link>
