@@ -8,7 +8,7 @@
 유저/가맹점주 기능분리<br>
 주문한 내역을 한눈에보고 픽업여부를 알려주는 주문내역<br>
 <br>
-<a href="https://gorhf9397.github.io/pass-order/">배포 URL</a>입니다.
+<a href="https://trr456-hub.github.io/pass-order/">배포 URL</a>입니다.
 <br>
 <a href="https://good-elephant-241.notion.site/caf552c96b11425eb314fadddb419b6a">기획 및 프로젝트에 목표</a>입니다.
 
