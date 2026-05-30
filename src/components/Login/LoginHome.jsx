@@ -69,13 +69,13 @@ const LoginHome = () => {
           >
             <span>Google</span> 로그인
           </button>
-          <button
+          {/* <button
             className="loginBtn facebook"
             name="facebook"
             onClick={socialLogin}
           >
             <span>facebook</span> 로그인
-          </button>
+          </button>*/}
         </div>
       </div>
     </div>
